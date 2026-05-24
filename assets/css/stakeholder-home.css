@@ -448,10 +448,13 @@
 
 .stakeholder-home-page .ba-flow-step strong {
   align-self: center;
-  color: var(--stakeholder-ink);
+  color: #ffd4e3;
   font-size: clamp(1rem, 1.28vw, 1.22rem);
   line-height: 1.18;
   text-align: left;
+  text-shadow:
+    0 0 18px rgba(255, 143, 183, 0.28),
+    0 1px 0 rgba(0, 0, 0, 0.22) !important;
 }
 
 .stakeholder-home-page a.ba-flow-step:hover,
@@ -463,6 +466,12 @@
     linear-gradient(145deg, rgba(143, 183, 255, 0.34), rgba(124, 108, 255, 0.18) 48%, rgba(255, 143, 183, 0.2)),
     rgba(18, 14, 44, 0.9);
   color: var(--stakeholder-ink);
+}
+
+.stakeholder-home-page a.ba-flow-step:visited strong,
+.stakeholder-home-page a.ba-flow-step:hover strong,
+.stakeholder-home-page a.ba-flow-step:focus-visible strong {
+  color: #ffe6f0;
 }
 
 .stakeholder-home-page a.ba-flow-step:hover,
