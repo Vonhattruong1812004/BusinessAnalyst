@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-STK-04 cho Stakeholder rà soát yêu cầu đã được Business Analyst phân tích."
+    />
+    <title>UC-STK-04 Rà Soát Yêu Cầu Đã Phân Tích | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=stk-uc4-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/stakeholder-uc.css?v=stk-uc4-review-v1" />
+  </head>
+  <body class="stakeholder-uc-page stakeholder-review-page">
+    <canvas id="stakeholderUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar stakeholder-uc-topbar">
+      <a class="brand" href="../actors/stakeholder.html" aria-label="Quay về trang chủ Stakeholder">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-STK-04</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/stakeholder.html">← Trang chủ Stakeholder</a>
+    </header>
+
+    <main class="stakeholder-uc-shell" aria-labelledby="page-title">
+      <section class="stakeholder-uc-hero review-hero">
+        <div>
+          <p class="eyebrow">UC-STK-04 · Rà soát yêu cầu đã phân tích</p>
+          <h1 id="page-title">Phòng Review Requirement</h1>
+          <p>
+            Stakeholder đối chiếu requirement BA đã phân tích với thực tế nghiệp vụ,
+            phản hồi acceptance criteria và gửi kết quả review trước khi yêu cầu được baseline.
+          </p>
+        </div>
+
+        <aside class="stakeholder-uc-status" aria-label="Tình trạng rà soát">
+          <span>Yêu cầu đang rà soát</span>
+          <strong id="activeRequirementTitle">Chưa chọn</strong>
+          <small id="activeRequirementMeta">Chọn một yêu cầu để bắt đầu review.</small>
+        </aside>
+      </section>
+
+      <section class="stakeholder-uc-layout review-layout">
+        <aside class="stakeholder-question-inbox" aria-label="Danh sách yêu cầu chờ rà soát">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Requirement</p>
+              <h2>Chờ Stakeholder review</h2>
+            </div>
+            <span id="requirementCount">0 yêu cầu</span>
+          </div>
+
+          <div class="stakeholder-pack-list" id="requirementList"></div>
+        </aside>
+
+        <section class="stakeholder-answer-workbench review-workbench" aria-label="Chi tiết yêu cầu đã phân tích">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Nội dung yêu cầu</p>
+              <h2 id="requirementTitle">Chưa chọn yêu cầu</h2>
+            </div>
+            <span class="response-state" id="requirementStatus">Chờ rà soát</span>
+          </div>
+
+          <div class="answer-context-grid" aria-label="Ngữ cảnh yêu cầu">
+            <article>
+              <span>Mã yêu cầu</span>
+              <strong id="requirementCode">-</strong>
+            </article>
+            <article>
+              <span>Loại</span>
+              <strong id="requirementType">-</strong>
+            </article>
+            <article>
+              <span>Phiên bản</span>
+              <strong id="requirementVersion">-</strong>
+            </article>
+          </div>
+
+          <div class="requirement-detail-grid">
+            <article class="requirement-info-card span-2">
+              <span>Mô tả yêu cầu</span>
+              <p id="requirementDescription">-</p>
+            </article>
+            <article class="requirement-info-card">
+              <span>Lý do nghiệp vụ</span>
+              <p id="requirementRationale">-</p>
+            </article>
+            <article class="requirement-info-card">
+              <span>Phạm vi áp dụng</span>
+              <p id="requirementScope">-</p>
+            </article>
+          </div>
+
+          <section class="acceptance-review-area" aria-label="Acceptance criteria cần rà soát">
+            <div class="answer-toolbar">
+              <strong>Acceptance criteria</strong>
+              <span id="acProgress">0% đã đánh giá</span>
+            </div>
+            <div class="acceptance-list" id="acceptanceList"></div>
+          </section>
+        </section>
+
+        <form class="stakeholder-response-panel review-decision-panel" id="reviewForm">
+          <div class="response-score-card">
+            <span>Độ sẵn sàng review</span>
+            <strong id="reviewScore">0%</strong>
+            <small id="reviewScoreText">Chưa có phản hồi rà soát.</small>
+          </div>
+
+          <label class="stakeholder-field">
+            <span>Kết quả rà soát</span>
+            <select id="reviewDecision" name="reviewDecision">
+              <option>Đồng ý</option>
+              <option>Cần chỉnh sửa</option>
+              <option>Cần làm rõ</option>
+              <option>Không đồng ý</option>
+            </select>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Ghi chú phản hồi cho BA</span>
+            <textarea
+              id="reviewNote"
+              name="reviewNote"
+              rows="6"
+              placeholder="Ghi rõ điểm đúng, điểm cần chỉnh sửa, câu hỏi cần làm rõ hoặc lý do không đồng ý."
+            ></textarea>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Minh chứng / nguồn đối chiếu</span>
+            <input id="reviewEvidence" name="reviewEvidence" type="text" placeholder="Ví dụ: policy, biên bản workshop, quyết định SME, quy trình vận hành" />
+          </label>
+
+          <div class="response-checklist">
+            <p id="checkReviewDecision">Đã chọn kết quả rà soát</p>
+            <p id="checkRequirementRead">Đã đọc nội dung yêu cầu</p>
+            <p id="checkAcReviewed">Đã đánh giá acceptance criteria</p>
+            <p id="checkReviewNote">Có ghi chú khi cần chỉnh sửa/làm rõ</p>
+          </div>
+
+          <div class="stakeholder-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>AI có thể gợi ý điểm mơ hồ hoặc AC chưa kiểm thử được. Stakeholder vẫn xác nhận phản hồi cuối cùng.</p>
+          </div>
+
+          <div class="stakeholder-form-actions">
+            <button class="secondary-action" id="saveReviewDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="suggestReview" type="button">Gợi ý phản hồi</button>
+            <button class="primary-action" type="submit">Gửi review cho BA</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/stakeholder-use-cases/review-requirements.js?v=stk-uc4-review-v1"></script>
+  </body>
+</html>
