@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-09 Bàn Giao Gói Phân Tích | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc9-handoff-v1" />
+  </head>
+  <body class="handoff-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-09</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc9-shell">
+      <section class="uc9-hero">
+        <div>
+          <p class="eyebrow">UC-BA-09 · Bàn giao gói phân tích</p>
+          <h1>Handoff Command Center</h1>
+          <p>
+            BA đóng gói requirement, acceptance criteria, quality review, traceability,
+            change log, open issue và điều kiện sign-off để chuyển giao cho PO, PM, Dev, QA và SME.
+          </p>
+        </div>
+        <aside class="uc9-hero-status" aria-label="Tổng quan bàn giao">
+          <span>Handoff readiness</span>
+          <strong id="readinessHero">0%</strong>
+          <small id="readinessHeroMeta">Chọn requirement set để kiểm tra mức sẵn sàng bàn giao.</small>
+        </aside>
+      </section>
+
+      <section class="uc9-layout">
+        <aside class="uc9-list-panel" aria-label="Danh sách bộ yêu cầu">
+          <div class="uc9-panel-head">
+            <div>
+              <p class="eyebrow">Requirement Set</p>
+              <h2>Gói phân tích</h2>
+            </div>
+          </div>
+          <div class="uc9-set-list" id="handoffSetList"></div>
+        </aside>
+
+        <form class="uc9-form" id="handoffForm">
+          <input id="packageId" name="packageId" type="hidden" />
+
+          <div class="uc9-panel-head form-title-row span-2">
+            <div>
+              <p class="eyebrow">Package Builder</p>
+              <h2>Chuẩn bị bàn giao</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <label class="ba-field span-2">
+            <span>Requirement Set *</span>
+            <select id="requirementSet" name="requirementSet" required></select>
+          </label>
+
+          <label class="ba-field">
+            <span>Tên gói bàn giao *</span>
+            <input id="packageName" name="packageName" type="text" required placeholder="Ví dụ: Gói phân tích duyệt khoản vay v0.3" />
+          </label>
+
+          <label class="ba-field">
+            <span>Loại gói *</span>
+            <select id="packageType" name="packageType" required>
+              <option>Full Analysis Pack</option>
+              <option>BRD Package</option>
+              <option>SRS Package</option>
+              <option>Backlog Package</option>
+              <option>UAT Package</option>
+              <option>Baseline Pack</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Release / baseline</span>
+            <input id="releaseName" name="releaseName" type="text" placeholder="Ví dụ: Baseline v0.3 / Sprint 12" />
+          </label>
+
+          <label class="ba-field">
+            <span>Trạng thái bàn giao</span>
+            <select id="handoffStatus" name="handoffStatus">
+              <option>Draft</option>
+              <option>Ready for review</option>
+              <option>Waiting sign-off</option>
+              <option>Baselined</option>
+            </select>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Phạm vi bàn giao *</span>
+            <textarea id="includedScope" name="includedScope" rows="3" required placeholder="Những mục tiêu, requirement, process, rule, story hoặc UAT scope được đưa vào gói này."></textarea>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Ngoài phạm vi</span>
+            <textarea id="excludedScope" name="excludedScope" rows="3" placeholder="Những phần không nằm trong gói bàn giao lần này."></textarea>
+          </label>
+
+          <section class="uc9-readiness-board span-2" aria-label="Checklist sẵn sàng bàn giao">
+            <div class="uc9-board-toolbar">
+              <span>Handoff Readiness Board</span>
+              <strong id="readinessScore">0%</strong>
+            </div>
+            <div class="uc9-check-grid" id="readinessChecks"></div>
+          </section>
+
+          <section class="uc9-recipient-panel span-2" aria-label="Người nhận bàn giao">
+            <div class="uc9-board-toolbar">
+              <span>Recipient Map</span>
+              <strong id="recipientCount">0 bên nhận</strong>
+            </div>
+            <div class="uc9-recipient-grid" id="recipientList">
+              <label><input type="checkbox" name="recipients" value="Product Owner" checked /> <span>Product Owner</span></label>
+              <label><input type="checkbox" name="recipients" value="Project Manager" checked /> <span>Project Manager</span></label>
+              <label><input type="checkbox" name="recipients" value="Developer" checked /> <span>Developer</span></label>
+              <label><input type="checkbox" name="recipients" value="QA / Tester" checked /> <span>QA / Tester</span></label>
+              <label><input type="checkbox" name="recipients" value="SME / Stakeholder" /> <span>SME / Stakeholder</span></label>
+              <label><input type="checkbox" name="recipients" value="Compliance / Legal" /> <span>Compliance / Legal</span></label>
+            </div>
+          </section>
+
+          <label class="ba-field span-2">
+            <span>Open issue / điều kiện sign-off</span>
+            <textarea id="openIssues" name="openIssues" rows="4" placeholder="Ghi rõ điểm còn mở, quyết định cần xác nhận, CR chưa xử lý hoặc điều kiện để sign-off."></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="newPackage">Tạo gói mới</button>
+            <button class="primary-action" type="submit">Lưu gói bàn giao</button>
+          </div>
+        </form>
+
+        <aside class="uc9-summary-panel" aria-label="Tổng hợp gói bàn giao">
+          <div class="preview-card hero-preview">
+            <span>Readiness</span>
+            <strong id="readinessSummary">0%</strong>
+            <small id="readinessText">Chưa có dữ liệu để bàn giao.</small>
+          </div>
+
+          <div class="uc9-delivery-preview">
+            <span class="mini-label">Delivery Preview</span>
+            <div id="deliveryPreview"></div>
+          </div>
+
+          <div class="uc9-risk-panel">
+            <span class="mini-label">Risk & Open Issue</span>
+            <div id="handoffRiskList"></div>
+          </div>
+
+          <div class="uc9-signoff-panel">
+            <span class="mini-label">Sign-off Timeline</span>
+            <div id="signoffTimeline"></div>
+          </div>
+
+          <div class="uc9-ai-card">
+            <span class="mini-label">AI Handoff Assistant</span>
+            <p id="aiHandoffHint">AI sẽ tóm tắt thiếu sót khi BA chọn requirement set.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="handoffToast" role="status" aria-live="polite"></div>
+    <script src="./handoff.js?v=uc9-handoff-v1"></script>
+  </body>
+</html>

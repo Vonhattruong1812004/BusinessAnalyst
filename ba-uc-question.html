@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-03 Chuẩn Bị Câu Hỏi Khai Thác | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc3-question-v2" />
+  </head>
+  <body class="question-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-03</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc3-shell">
+      <section class="uc3-hero">
+        <div>
+          <p class="eyebrow">UC-BA-03 · Chuẩn bị câu hỏi khai thác</p>
+          <h1>Phòng Chuẩn Bị Câu Hỏi</h1>
+          <p>
+            BA chuẩn bị bộ câu hỏi trước khi gặp stakeholder: xác định mục tiêu buổi hỏi,
+            chọn đúng nguồn thông tin, tạo câu hỏi chính, câu hỏi đào sâu và kiểm soát chất lượng
+            để bước thu thập thông tin không bị lan man.
+          </p>
+        </div>
+        <aside class="uc3-hero-status" aria-label="Tổng quan bộ câu hỏi">
+          <span>Bộ câu hỏi đang mở</span>
+          <strong id="activePackName">Chưa chọn</strong>
+          <small id="activePackMeta">Tạo mới hoặc chọn một bộ câu hỏi bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc3-layout">
+        <aside class="uc3-list-panel" aria-label="Danh sách bộ câu hỏi">
+          <div class="uc3-panel-head">
+            <div>
+              <p class="eyebrow">Bộ câu hỏi</p>
+              <h2>Bộ câu hỏi</h2>
+            </div>
+            <button class="mini-action" id="newPack" type="button">Tạo mới</button>
+          </div>
+
+          <div class="uc3-record-list" id="packList"></div>
+        </aside>
+
+        <form class="uc3-form" id="questionPackForm">
+          <div class="uc3-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Chiến lược khai thác</p>
+              <h2>Thiết lập buổi hỏi</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="packId" name="packId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Ngữ cảnh và mục tiêu khai thác</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Tên bộ câu hỏi *</span>
+            <input id="packName" name="packName" type="text" required placeholder="Ví dụ: Khai thác quy tắc rủi ro" />
+          </label>
+
+          <label class="ba-field">
+            <span>Không gian phân tích</span>
+            <select id="workspace" name="workspace"></select>
+          </label>
+
+          <label class="ba-field">
+            <span>Stakeholder / nguồn thông tin *</span>
+            <select id="stakeholder" name="stakeholder" required></select>
+          </label>
+
+          <label class="ba-field">
+            <span>Hình thức khai thác</span>
+            <select id="elicitationType" name="elicitationType">
+              <option>Phỏng vấn 1-1</option>
+              <option>Workshop</option>
+              <option>Review tài liệu</option>
+              <option>Quan sát quy trình</option>
+              <option>Khảo sát</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Mục tiêu buổi hỏi *</span>
+            <select id="objective" name="objective" required>
+              <option>Làm rõ nhu cầu kinh doanh</option>
+              <option>Khám phá pain point</option>
+              <option>Làm rõ quy trình hiện tại</option>
+              <option>Xác định business rule</option>
+              <option>Xác nhận phạm vi</option>
+              <option>Làm rõ dữ liệu và báo cáo</option>
+              <option>Làm rõ ngoại lệ và rủi ro</option>
+              <option>Ưu tiên yêu cầu</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Chủ đề trọng tâm</span>
+            <input id="topic" name="topic" type="text" placeholder="Ví dụ: phê duyệt khoản vay trên 500M" />
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Bối cảnh BA đã biết</span>
+            <textarea id="knownContext" name="knownContext" rows="4" placeholder="Tóm tắt vấn đề, mục tiêu, rule hoặc thông tin đã có trước buổi hỏi."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Điểm chưa rõ cần đào sâu</span>
+            <textarea id="informationGaps" name="informationGaps" rows="4" placeholder="Ví dụ: ngưỡng phê duyệt, ngoại lệ, dữ liệu đầu vào, người chịu trách nhiệm."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Ràng buộc khi đặt câu hỏi</span>
+            <textarea id="constraints" name="constraints" rows="4" placeholder="Ví dụ: thời lượng 45 phút, stakeholder bận, tránh câu hỏi dẫn dắt."></textarea>
+          </label>
+
+          <div class="uc3-ai-panel span-2" aria-label="AI hỗ trợ tạo câu hỏi">
+            <div>
+              <span>AI Copilot</span>
+              <strong>Gợi ý câu hỏi theo ngữ cảnh</strong>
+              <p>AI tạo bản nháp. BA vẫn chỉnh sửa và xác nhận trước khi lưu.</p>
+            </div>
+            <button class="primary-action" id="generateQuestions" type="button">Tạo câu hỏi</button>
+          </div>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Bộ câu hỏi BA sẽ dùng khi khai thác</strong>
+          </div>
+
+          <section class="uc3-question-builder span-2" aria-label="Danh sách câu hỏi">
+            <div class="uc3-question-toolbar">
+              <button class="secondary-action" id="addQuestion" type="button">Thêm câu hỏi</button>
+              <span id="questionCount">0 câu hỏi</span>
+            </div>
+            <div class="uc3-question-list" id="questionList"></div>
+          </section>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardPackChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu bộ câu hỏi</button>
+          </div>
+        </form>
+
+        <aside class="uc3-summary-panel" aria-label="Đánh giá chất lượng bộ câu hỏi">
+          <div class="preview-card hero-preview">
+            <span>Bộ câu hỏi</span>
+            <strong id="previewPackName">Chưa đặt tên</strong>
+            <small id="previewPackMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc3-readiness">
+            <div>
+              <span>Độ sẵn sàng</span>
+              <strong id="questionReadinessScore">0%</strong>
+            </div>
+            <p id="questionReadinessText">Chưa đủ dữ liệu để bước vào khai thác.</p>
+          </div>
+
+          <div class="uc3-checklist">
+            <span class="mini-label">Kiểm soát chất lượng</span>
+            <p id="checkStakeholder">Đã chọn stakeholder</p>
+            <p id="checkObjective">Đã xác định mục tiêu buổi hỏi</p>
+            <p id="checkContext">Có bối cảnh hoặc điểm chưa rõ</p>
+            <p id="checkEnoughQuestions">Có ít nhất 6 câu hỏi</p>
+            <p id="checkCategories">Có nhiều nhóm câu hỏi</p>
+            <p id="checkFollowUp">Có câu hỏi đào sâu</p>
+          </div>
+
+          <div class="uc3-lens-card">
+            <span class="mini-label">Góc nhìn câu hỏi</span>
+            <div id="lensList"></div>
+          </div>
+
+          <div class="preview-card">
+            <span>Rủi ro khi khai thác</span>
+            <p id="previewRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="questionToast" role="status" aria-live="polite"></div>
+    <script src="./question.js?v=uc3-question-v2"></script>
+  </body>
+</html>

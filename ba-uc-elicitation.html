@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-04 Thu Thập Thông Tin Và Làm Rõ Nhu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc4-elicitation-v2" />
+  </head>
+  <body class="elicitation-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-04</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc4-shell">
+      <section class="uc4-hero">
+        <div>
+          <p class="eyebrow">UC-BA-04 · Thu thập thông tin và làm rõ nhu cầu</p>
+          <h1>Phòng Ghi Nhận Khai Thác</h1>
+          <p>
+            BA dùng bộ câu hỏi từ UC3 để ghi câu trả lời, phát hiện nhu cầu, pain point,
+            business rule, ngoại lệ, quyết định, câu hỏi mở và action item trong buổi làm việc
+            với stakeholder.
+          </p>
+        </div>
+        <aside class="uc4-hero-status" aria-label="Tổng quan bản ghi khai thác">
+          <span>Bản ghi đang mở</span>
+          <strong id="activeRecordName">Chưa chọn</strong>
+          <small id="activeRecordMeta">Tạo mới hoặc chọn một bản ghi bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc4-layout">
+        <aside class="uc4-list-panel" aria-label="Danh sách bản ghi khai thác">
+          <div class="uc4-panel-head">
+            <div>
+              <p class="eyebrow">Elicitation Record</p>
+              <h2>Bản ghi khai thác</h2>
+            </div>
+            <button class="mini-action" id="newRecord" type="button">Tạo mới</button>
+          </div>
+          <div class="uc4-record-list" id="recordList"></div>
+        </aside>
+
+        <form class="uc4-form" id="elicitationForm">
+          <div class="uc4-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Buổi khai thác</p>
+              <h2>Ghi nhận thông tin</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="recordId" name="recordId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Thiết lập buổi khai thác</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Tên bản ghi *</span>
+            <input id="recordName" name="recordName" type="text" required placeholder="Ví dụ: Workshop rule rủi ro" />
+          </label>
+
+          <label class="ba-field">
+            <span>Bộ câu hỏi từ UC3 *</span>
+            <select id="questionPack" name="questionPack" required></select>
+          </label>
+
+          <label class="ba-field">
+            <span>Thời gian</span>
+            <input id="sessionDate" name="sessionDate" type="datetime-local" />
+          </label>
+
+          <label class="ba-field">
+            <span>Hình thức</span>
+            <select id="sessionType" name="sessionType">
+              <option>Phỏng vấn 1-1</option>
+              <option>Workshop</option>
+              <option>Review tài liệu</option>
+              <option>Quan sát quy trình</option>
+              <option>Khảo sát</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Stakeholder / nguồn</span>
+            <input id="stakeholderName" name="stakeholderName" type="text" placeholder="Tự lấy từ bộ câu hỏi hoặc nhập thủ công" />
+          </label>
+
+          <label class="ba-field">
+            <span>Mục tiêu buổi khai thác</span>
+            <input id="sessionObjective" name="sessionObjective" type="text" placeholder="Tự lấy từ bộ câu hỏi hoặc nhập thủ công" />
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Ghi chú bối cảnh buổi làm việc</span>
+            <textarea id="sessionContext" name="sessionContext" rows="3" placeholder="Không khí buổi họp, phạm vi trao đổi, dữ liệu/tài liệu được nhắc tới."></textarea>
+          </label>
+
+          <div class="uc4-source-panel span-2" aria-label="Nguồn câu hỏi">
+            <div>
+              <span>Nguồn từ UC3</span>
+              <strong id="sourcePackName">Chưa chọn bộ câu hỏi</strong>
+              <p id="sourcePackMeta">Khi chọn bộ câu hỏi, hệ thống sẽ mở danh sách câu hỏi để BA ghi câu trả lời.</p>
+            </div>
+            <button class="secondary-action" id="reloadPackQuestions" type="button">Nạp lại câu hỏi</button>
+          </div>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Câu trả lời và thông tin phát hiện</strong>
+          </div>
+
+          <section class="uc4-answer-board span-2" aria-label="Câu trả lời theo câu hỏi">
+            <div class="uc4-answer-toolbar">
+              <span id="answerCount">0 câu trả lời</span>
+              <button class="secondary-action" id="addEmergentAnswer" type="button">Thêm câu phát sinh</button>
+            </div>
+            <div class="uc4-answer-list" id="answerList"></div>
+          </section>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Decision, câu hỏi mở và action item</strong>
+          </div>
+
+          <section class="uc4-capture-grid span-2">
+            <article class="uc4-capture-card">
+              <div class="uc4-capture-head">
+                <span>Decision log</span>
+                <button class="mini-action" id="addDecision" type="button">Thêm</button>
+              </div>
+              <div class="uc4-mini-list" id="decisionList"></div>
+            </article>
+
+            <article class="uc4-capture-card">
+              <div class="uc4-capture-head">
+                <span>Câu hỏi mở</span>
+                <button class="mini-action" id="addOpenQuestion" type="button">Thêm</button>
+              </div>
+              <div class="uc4-mini-list" id="openQuestionList"></div>
+            </article>
+
+            <article class="uc4-capture-card">
+              <div class="uc4-capture-head">
+                <span>Action item</span>
+                <button class="mini-action" id="addActionItem" type="button">Thêm</button>
+              </div>
+              <div class="uc4-mini-list" id="actionItemList"></div>
+            </article>
+          </section>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardRecordChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu bản ghi</button>
+          </div>
+        </form>
+
+        <aside class="uc4-summary-panel" aria-label="Tổng hợp chất lượng khai thác">
+          <div class="preview-card hero-preview">
+            <span>Bản ghi khai thác</span>
+            <strong id="previewRecordName">Chưa đặt tên</strong>
+            <small id="previewRecordMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc4-readiness">
+            <div>
+              <span>Độ rõ ràng</span>
+              <strong id="clarityScore">0%</strong>
+            </div>
+            <p id="clarityText">Chưa đủ thông tin để dùng cho bước phân tích.</p>
+          </div>
+
+          <div class="uc4-checklist">
+            <span class="mini-label">Điều kiện tối thiểu</span>
+            <p id="checkPack">Đã chọn bộ câu hỏi</p>
+            <p id="checkAnswers">Có câu trả lời được ghi nhận</p>
+            <p id="checkInsights">Có thông tin được phân loại</p>
+            <p id="checkOpenItems">Có câu hỏi mở hoặc decision/action rõ ràng</p>
+            <p id="checkConflicts">Đã nhận diện điểm mâu thuẫn nếu có</p>
+          </div>
+
+          <div class="uc4-insight-card">
+            <span class="mini-label">Thông tin phát hiện</span>
+            <div id="insightList"></div>
+          </div>
+
+          <div class="preview-card">
+            <span>Cảnh báo BA</span>
+            <p id="elicitationRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="elicitationToast" role="status" aria-live="polite"></div>
+    <script src="./elicitation.js?v=uc4-elicitation-v2"></script>
+  </body>
+</html>

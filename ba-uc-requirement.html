@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-06 Chuyển Nhu Cầu Thành Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc6-requirement-v2" />
+  </head>
+  <body class="requirement-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-06</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc6-shell">
+      <section class="uc6-hero">
+        <div>
+          <p class="eyebrow">UC-BA-06 · Chuyển nhu cầu thành yêu cầu</p>
+          <h1>Xưởng Đặc Tả Yêu Cầu</h1>
+          <p>
+            BA chuyển insight, process step, gap, rule và bối cảnh từ UC5 thành requirement
+            có loại rõ ràng, source trace, mô tả, rationale, acceptance criteria, owner,
+            priority, status và version.
+          </p>
+        </div>
+        <aside class="uc6-hero-status" aria-label="Tổng quan requirement set">
+          <span>Requirement Set đang mở</span>
+          <strong id="activeSetName">Chưa chọn</strong>
+          <small id="activeSetMeta">Tạo mới hoặc chọn một bộ yêu cầu bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc6-layout">
+        <aside class="uc6-list-panel" aria-label="Danh sách requirement set">
+          <div class="uc6-panel-head">
+            <div>
+              <p class="eyebrow">Requirement Set</p>
+              <h2>Bộ yêu cầu</h2>
+            </div>
+            <button class="mini-action" id="newSet" type="button">Tạo mới</button>
+          </div>
+          <div class="uc6-set-list" id="setList"></div>
+        </aside>
+
+        <form class="uc6-form" id="requirementForm">
+          <div class="uc6-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Đặc tả yêu cầu</p>
+              <h2>Chuyển insight thành requirement</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="setId" name="setId" type="hidden" />
+          <input id="requirementId" name="requirementId" type="hidden" />
+          <input id="sourceId" name="sourceId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Nguồn phân tích từ UC5</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Tên bộ yêu cầu *</span>
+            <input id="setName" name="setName" type="text" required placeholder="Ví dụ: Requirement set duyệt khoản vay" />
+          </label>
+
+          <label class="ba-field">
+            <span>Business Analysis Map *</span>
+            <select id="analysisMap" name="analysisMap" required></select>
+          </label>
+
+          <div class="uc6-source-panel span-2" aria-label="Nguồn phân tích">
+            <div>
+              <span>Nguồn từ UC5</span>
+              <strong id="sourceMapName">Chưa chọn bản đồ phân tích</strong>
+              <p id="sourceMapMeta">Chọn một source item để tạo requirement có truy vết.</p>
+            </div>
+            <button class="secondary-action" id="draftRequirement" type="button">Tạo nháp từ source</button>
+          </div>
+
+          <div class="uc6-trace-card span-2" aria-label="Source trace đang chọn">
+            <span>Source trace đang chọn</span>
+            <strong id="selectedSourceTitle">Chưa chọn source</strong>
+            <p id="selectedSourceDetail">Requirement nên có nguồn rõ từ UC5 trước khi đưa sang review.</p>
+          </div>
+
+          <section class="uc6-source-board span-2" aria-label="Source item từ UC5">
+            <div class="uc6-source-toolbar">
+              <span id="sourceCount">0 source item</span>
+            </div>
+            <div class="uc6-source-list" id="sourceList"></div>
+          </section>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Danh sách yêu cầu</strong>
+          </div>
+
+          <section class="uc6-requirement-board span-2" aria-label="Danh sách yêu cầu">
+            <div class="uc6-source-toolbar">
+              <span id="requirementCount">0 yêu cầu</span>
+              <div class="uc6-toolbar-actions">
+                <button class="secondary-action" id="newRequirement" type="button">Thêm yêu cầu</button>
+                <button class="secondary-action danger-action" id="deleteRequirement" type="button">Xóa yêu cầu</button>
+              </div>
+            </div>
+            <div class="uc6-requirement-list" id="requirementList"></div>
+          </section>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Nội dung requirement</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Mã yêu cầu</span>
+            <input id="requirementCode" name="requirementCode" type="text" placeholder="Ví dụ: FR-001" />
+          </label>
+
+          <label class="ba-field">
+            <span>Loại yêu cầu *</span>
+            <select id="requirementType" name="requirementType" required>
+              <option>BR</option>
+              <option>FR</option>
+              <option>NFR</option>
+              <option>RULE</option>
+              <option>US</option>
+            </select>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Tiêu đề *</span>
+            <input id="requirementTitle" name="requirementTitle" type="text" required placeholder="Tên requirement rõ, ngắn, có nghĩa nghiệp vụ" />
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Mô tả yêu cầu *</span>
+            <textarea id="requirementDescription" name="requirementDescription" rows="4" required placeholder="Hệ thống/quy trình cần làm gì, cho ai, trong bối cảnh nào?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Rationale / lý do nghiệp vụ</span>
+            <textarea id="rationale" name="rationale" rows="4" placeholder="Vì sao yêu cầu này cần tồn tại? Nó giải quyết pain point/gap nào?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Phạm vi áp dụng</span>
+            <textarea id="scope" name="scope" rows="4" placeholder="Áp dụng cho quy trình, actor, dữ liệu, kênh hoặc trường hợp nào?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Owner / reviewer</span>
+            <input id="owner" name="owner" type="text" placeholder="Ví dụ: BA Linh, PO, SME rủi ro" />
+          </label>
+
+          <label class="ba-field">
+            <span>Priority sơ bộ</span>
+            <select id="priority" name="priority">
+              <option>Must</option>
+              <option>Should</option>
+              <option>Could</option>
+              <option>Won't now</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Status</span>
+            <select id="status" name="status">
+              <option>Draft</option>
+              <option>Need Clarification</option>
+              <option>Ready Review</option>
+              <option>Approved</option>
+              <option>Baseline</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Version</span>
+            <input id="version" name="version" type="text" placeholder="v0.1" />
+          </label>
+
+          <section class="uc6-ac-board span-2" aria-label="Acceptance criteria">
+            <div class="uc6-source-toolbar">
+              <span id="acCount">0 acceptance criteria</span>
+              <button class="secondary-action" id="addAcceptanceCriterion" type="button">Thêm AC</button>
+            </div>
+            <div class="uc6-ac-list" id="acceptanceList"></div>
+          </section>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardRequirementChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu bộ yêu cầu</button>
+          </div>
+        </form>
+
+        <aside class="uc6-summary-panel" aria-label="Tổng hợp chất lượng requirement">
+          <div class="preview-card hero-preview">
+            <span>Requirement đang soạn</span>
+            <strong id="previewRequirementName">Chưa có yêu cầu</strong>
+            <small id="previewRequirementMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc6-readiness">
+            <div>
+              <span>Độ sẵn sàng</span>
+              <strong id="requirementReadinessScore">0%</strong>
+            </div>
+            <p id="requirementReadinessText">Requirement chưa đủ điều kiện review.</p>
+          </div>
+
+          <div class="uc6-checklist">
+            <span class="mini-label">Điều kiện review</span>
+            <p id="checkSource">Có source trace từ UC5</p>
+            <p id="checkTitle">Có tiêu đề và mô tả</p>
+            <p id="checkType">Có loại yêu cầu</p>
+            <p id="checkAC">Có ít nhất 2 acceptance criteria</p>
+            <p id="checkOwner">Có owner / reviewer</p>
+            <p id="checkStatus">Status phù hợp với chất lượng</p>
+          </div>
+
+          <div class="uc6-lens-card">
+            <span class="mini-label">Requirement Lens</span>
+            <div id="requirementLens"></div>
+          </div>
+
+          <div class="preview-card">
+            <span>Cảnh báo BA</span>
+            <p id="requirementRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="requirementToast" role="status" aria-live="polite"></div>
+    <script src="./requirement.js?v=uc6-requirement-v2"></script>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-08 Truy Vết Và Quản Lý Thay Đổi Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc8-trace-change-v1" />
+  </head>
+  <body class="traceability-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-08</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc8-shell">
+      <section class="uc8-hero">
+        <div>
+          <p class="eyebrow">UC-BA-08 · Truy vết và quản lý thay đổi yêu cầu</p>
+          <h1>Trace & Change Studio</h1>
+          <p>
+            BA kiểm soát nguồn gốc requirement, liên kết goal → need → requirement → story/test,
+            sau đó phân tích tác động khi stakeholder hoặc đội dự án đề xuất thay đổi.
+          </p>
+        </div>
+        <aside class="uc8-hero-status" aria-label="Tổng quan truy vết">
+          <span>Trace coverage</span>
+          <strong id="traceCoverageHero">0%</strong>
+          <small id="traceCoverageMeta">Chọn requirement set để xem độ phủ truy vết.</small>
+        </aside>
+      </section>
+
+      <section class="uc8-layout">
+        <aside class="uc8-list-panel" aria-label="Danh sách bộ yêu cầu">
+          <div class="uc8-panel-head">
+            <div>
+              <p class="eyebrow">Requirement Set</p>
+              <h2>Bộ yêu cầu</h2>
+            </div>
+          </div>
+          <div class="uc8-set-list" id="traceSetList"></div>
+        </aside>
+
+        <section class="uc8-workbench" aria-label="Không gian truy vết và thay đổi">
+          <form class="uc8-form" id="traceForm">
+            <input id="changeId" name="changeId" type="hidden" />
+
+            <div class="uc8-panel-head form-title-row span-2">
+              <div>
+                <p class="eyebrow">Traceability Matrix</p>
+                <h2>Ma trận truy vết yêu cầu</h2>
+              </div>
+              <span class="required-note">* Bắt buộc</span>
+            </div>
+
+            <label class="ba-field span-2">
+              <span>Requirement Set *</span>
+              <select id="requirementSet" name="requirementSet" required></select>
+            </label>
+
+            <section class="uc8-matrix-panel span-2" aria-label="Ma trận truy vết">
+              <div class="uc8-matrix-toolbar">
+                <span id="matrixCount">0 requirement</span>
+                <strong id="matrixHealth">Chưa có dữ liệu</strong>
+              </div>
+              <div class="uc8-trace-matrix" id="traceMatrix"></div>
+            </section>
+
+            <div class="form-section-title span-2">
+              <span>1</span>
+              <strong>Tạo Change Request</strong>
+            </div>
+
+            <label class="ba-field">
+              <span>Tiêu đề thay đổi *</span>
+              <input id="changeTitle" name="changeTitle" type="text" required placeholder="Ví dụ: Bổ sung xác minh sinh trắc học" />
+            </label>
+
+            <label class="ba-field">
+              <span>Nguồn thay đổi *</span>
+              <input id="changeSource" name="changeSource" type="text" required placeholder="Stakeholder / PO / SME / Compliance" />
+            </label>
+
+            <label class="ba-field span-2">
+              <span>Lý do thay đổi *</span>
+              <textarea id="changeReason" name="changeReason" rows="3" required placeholder="Vì sao thay đổi được đề xuất, vấn đề hoặc mục tiêu cần xử lý là gì?"></textarea>
+            </label>
+
+            <label class="ba-field">
+              <span>Mức khẩn cấp</span>
+              <select id="urgency" name="urgency">
+                <option>Thấp</option>
+                <option>Trung bình</option>
+                <option>Cao</option>
+                <option>Khẩn cấp</option>
+              </select>
+            </label>
+
+            <label class="ba-field">
+              <span>Phạm vi tác động</span>
+              <select id="impactScope" name="impactScope">
+                <option>Requirement đơn lẻ</option>
+                <option>Nhiều requirement</option>
+                <option>Quy trình nghiệp vụ</option>
+                <option>Scope / timeline / chi phí</option>
+              </select>
+            </label>
+
+            <label class="ba-field">
+              <span>Luồng phê duyệt</span>
+              <select id="approvalPath" name="approvalPath">
+                <option>BA xác nhận</option>
+                <option>PO xác nhận</option>
+                <option>SME + PO xác nhận</option>
+                <option>Change Control Board</option>
+              </select>
+            </label>
+
+            <label class="ba-field">
+              <span>Quyết định</span>
+              <select id="decision" name="decision">
+                <option>Cần làm rõ</option>
+                <option>Đưa vào backlog</option>
+                <option>Chấp nhận thay đổi</option>
+                <option>Từ chối thay đổi</option>
+              </select>
+            </label>
+
+            <section class="uc8-impact-picker span-2" aria-label="Chọn requirement bị ảnh hưởng">
+              <div class="uc8-board-toolbar">
+                <span>Requirement bị ảnh hưởng</span>
+                <strong id="affectedCount">0 đã chọn</strong>
+              </div>
+              <div class="uc8-affected-list" id="affectedRequirementList"></div>
+            </section>
+
+            <label class="ba-field span-2">
+              <span>Ghi chú phân tích tác động</span>
+              <textarea id="impactNote" name="impactNote" rows="4" placeholder="Ghi nhận tác động lên tài liệu, story, test case, stakeholder, timeline hoặc rủi ro dự án."></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="secondary-action" type="button" id="newChange">Tạo CR mới</button>
+              <button class="primary-action" type="submit">Lưu Change Request</button>
+            </div>
+          </form>
+
+          <section class="uc8-change-queue" aria-label="Danh sách change request">
+            <div class="uc8-panel-head">
+              <div>
+                <p class="eyebrow">Change Queue</p>
+                <h2>Lịch sử thay đổi</h2>
+              </div>
+            </div>
+            <div class="uc8-change-list" id="changeList"></div>
+          </section>
+        </section>
+
+        <aside class="uc8-summary-panel" aria-label="Tổng hợp truy vết và tác động">
+          <div class="preview-card hero-preview">
+            <span>Độ phủ truy vết</span>
+            <strong id="traceCoverage">0%</strong>
+            <small id="traceCoverageText">Chưa có requirement để truy vết.</small>
+          </div>
+
+          <div class="uc8-impact-radar" id="impactRadar" aria-label="Impact radar">
+            <span class="mini-label">Impact Radar</span>
+            <div class="uc8-radar-core">
+              <strong id="impactScore">0</strong>
+              <small id="impactLevel">Chưa đánh giá</small>
+            </div>
+          </div>
+
+          <div class="uc8-trace-lens">
+            <span class="mini-label">Trace Lens</span>
+            <div id="traceLens"></div>
+          </div>
+
+          <div class="uc8-ai-card">
+            <span class="mini-label">AI Impact Assistant</span>
+            <p id="aiImpactHint">Chọn requirement bị ảnh hưởng để nhận gợi ý vùng tác động.</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Cảnh báo BA</span>
+            <p id="traceRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="traceToast" role="status" aria-live="polite"></div>
+    <script src="./traceability.js?v=uc8-trace-change-v1"></script>
+  </body>
+</html>

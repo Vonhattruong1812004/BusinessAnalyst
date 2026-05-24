@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-01 Quản Lý Không Gian Phân Tích | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc1-visual-v3" />
+  </head>
+  <body class="workspace-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-01</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc1-shell">
+      <section class="uc1-hero">
+        <div>
+          <p class="eyebrow">UC-BA-01 · Quản lý không gian phân tích</p>
+          <h1>Không Gian Phân Tích</h1>
+          <p>
+            Nơi BA khởi tạo và kiểm soát bối cảnh phân tích: vấn đề kinh doanh,
+            mục tiêu, phạm vi, giả định, ràng buộc và trạng thái trước khi đi sang stakeholder,
+            khai thác câu hỏi, quy trình và yêu cầu.
+          </p>
+        </div>
+        <aside class="uc1-hero-status">
+          <span>Hồ sơ đang mở</span>
+          <strong id="activeWorkspaceName">Chưa chọn</strong>
+          <small id="activeWorkspaceMeta">Tạo mới hoặc chọn một hồ sơ bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc1-layout">
+        <aside class="uc1-list-panel" aria-label="Danh sách không gian phân tích">
+          <div class="uc1-panel-head">
+            <div>
+              <p class="eyebrow">Sổ hồ sơ</p>
+              <h2>Không gian phân tích</h2>
+            </div>
+            <button class="mini-action" id="newWorkspace" type="button">Tạo mới</button>
+          </div>
+
+          <div class="uc1-record-list" id="workspaceList"></div>
+        </aside>
+
+        <form class="uc1-form" id="workspaceForm">
+          <div class="uc1-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Hồ sơ nền tảng</p>
+              <h2>Thông tin phân tích</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Nhận diện không gian phân tích</strong>
+          </div>
+
+          <input id="workspaceId" name="workspaceId" type="hidden" />
+
+          <label class="ba-field">
+            <span>Tên không gian phân tích *</span>
+            <input id="workspaceName" name="workspaceName" type="text" required placeholder="Ví dụ: Cho vay số" />
+          </label>
+
+          <label class="ba-field">
+            <span>Mã dự án / sáng kiến</span>
+            <input id="projectCode" name="projectCode" type="text" placeholder="Ví dụ: DL-2026" />
+          </label>
+
+          <label class="ba-field">
+            <span>Người phụ trách *</span>
+            <input id="owner" name="owner" type="text" required placeholder="Ví dụ: BA Linh" />
+          </label>
+
+          <label class="ba-field">
+            <span>Trạng thái phân tích *</span>
+            <select id="status" name="status" required>
+              <option>Khởi tạo</option>
+              <option>Khám phá</option>
+              <option>Đang phân tích</option>
+              <option>Chờ xác nhận</option>
+              <option>Đã baseline</option>
+              <option>Đóng</option>
+            </select>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Mô tả ngắn</span>
+            <input id="shortDescription" name="shortDescription" type="text" placeholder="Tóm tắt một câu về sáng kiến phân tích." />
+          </label>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Bối cảnh, stakeholder ban đầu và nhu cầu</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Bối cảnh nghiệp vụ</span>
+            <textarea id="context" name="context" rows="4" placeholder="Bối cảnh, phòng ban, sản phẩm hoặc quy trình đang phân tích."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Stakeholder / sponsor ban đầu</span>
+            <textarea id="initialStakeholders" name="initialStakeholders" rows="4" placeholder="Ví dụ: Sponsor, Business Owner, SME chính, nhóm người dùng bị ảnh hưởng."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Vấn đề kinh doanh</span>
+            <textarea id="businessProblem" name="businessProblem" rows="4" placeholder="Vấn đề hiện tại là gì? Ai bị ảnh hưởng? Tác động ra sao?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Nhu cầu kinh doanh</span>
+            <textarea id="businessNeed" name="businessNeed" rows="4" placeholder="Doanh nghiệp/stakeholder thật sự cần điều gì để giải quyết vấn đề hoặc nắm bắt cơ hội?"></textarea>
+          </label>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Mục tiêu, giá trị và thay đổi mong muốn</strong>
+          </div>
+
+          <label class="ba-field span-2">
+            <span>Mục tiêu kinh doanh *</span>
+            <textarea id="businessGoal" name="businessGoal" rows="4" required placeholder="Ví dụ: Giảm 30% thời gian duyệt khoản vay trong quý triển khai đầu tiên."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Thay đổi mong muốn</span>
+            <textarea id="desiredChange" name="desiredChange" rows="4" placeholder="Sau phân tích/triển khai, quy trình, hành vi, dữ liệu hoặc quyết định sẽ thay đổi như thế nào?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Giá trị kỳ vọng</span>
+            <textarea id="expectedValue" name="expectedValue" rows="4" placeholder="Giá trị mang lại cho doanh nghiệp/stakeholder: thời gian, chi phí, trải nghiệm, tuân thủ, rủi ro."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Kết quả kỳ vọng</span>
+            <textarea id="expectedOutcome" name="expectedOutcome" rows="4" placeholder="Kết quả mong muốn sau khi sáng kiến hoàn tất."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>KPI / chỉ số đo lường</span>
+            <textarea id="kpi" name="kpi" rows="4" placeholder="Ví dụ: thời gian xử lý trung bình, tỷ lệ hồ sơ phải bổ sung."></textarea>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Giả thuyết giải pháp sơ bộ</span>
+            <textarea id="solutionHypothesis" name="solutionHypothesis" rows="4" placeholder="Nếu đã có định hướng ban đầu, ghi nhận như giả thuyết, chưa xem là quyết định cuối cùng."></textarea>
+          </label>
+
+          <div class="form-section-title">
+            <span>4</span>
+            <strong>Phạm vi, giả định và ràng buộc</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Trong phạm vi</span>
+            <textarea id="inScope" name="inScope" rows="4" placeholder="Các quy trình, tính năng, phòng ban, đối tượng nằm trong phạm vi."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Ngoài phạm vi</span>
+            <textarea id="outScope" name="outScope" rows="4" placeholder="Các phần chưa xử lý trong sáng kiến này."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Giả định</span>
+            <textarea id="assumptions" name="assumptions" rows="4" placeholder="Những điều đang được giả định là đúng trong lúc phân tích."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Ràng buộc</span>
+            <textarea id="constraints" name="constraints" rows="4" placeholder="Thời gian, ngân sách, tuân thủ, công nghệ, dữ liệu, nhân sự."></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu hồ sơ</button>
+          </div>
+        </form>
+
+        <aside class="uc1-summary-panel" aria-label="Tổng quan không gian phân tích">
+          <div class="preview-card hero-preview">
+            <span>Tổng quan hồ sơ</span>
+            <strong id="previewName">Chưa đặt tên</strong>
+            <small id="previewMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc1-readiness">
+            <div>
+              <span>Mức sẵn sàng</span>
+              <strong id="readinessScore">0%</strong>
+            </div>
+            <p id="readinessText">Chưa đủ thông tin nền tảng.</p>
+          </div>
+
+          <div class="uc1-checklist">
+            <span class="mini-label">Điều kiện tối thiểu</span>
+            <p id="checkName">Tên không gian phân tích</p>
+            <p id="checkOwner">Người phụ trách</p>
+            <p id="checkGoal">Mục tiêu kinh doanh</p>
+            <p id="checkNeed">Nhu cầu hoặc vấn đề kinh doanh</p>
+            <p id="checkValue">Giá trị / kết quả kỳ vọng</p>
+            <p id="checkScope">Phạm vi trong / ngoài</p>
+            <p id="checkContext">Bối cảnh hoặc stakeholder ban đầu</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Mục tiêu kinh doanh</span>
+            <p id="previewGoal">Chưa có mục tiêu kinh doanh.</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Vấn đề kinh doanh</span>
+            <p id="previewProblem">Chưa ghi nhận vấn đề kinh doanh.</p>
+          </div>
+
+          <div class="preview-card split-preview">
+            <div>
+              <span>Nhu cầu kinh doanh</span>
+              <p id="previewNeed">Chưa ghi nhận.</p>
+            </div>
+            <div>
+              <span>Giá trị kỳ vọng</span>
+              <p id="previewValue">Chưa ghi nhận.</p>
+            </div>
+          </div>
+
+          <div class="preview-card split-preview">
+            <div>
+              <span>Thay đổi mong muốn</span>
+              <p id="previewChange">Chưa ghi nhận.</p>
+            </div>
+            <div>
+              <span>Giả thuyết giải pháp</span>
+              <p id="previewSolution">Chưa ghi nhận.</p>
+            </div>
+          </div>
+
+          <div class="preview-card split-preview">
+            <div>
+              <span>Trong phạm vi</span>
+              <p id="previewInScope">Chưa xác định.</p>
+            </div>
+            <div>
+              <span>Ngoài phạm vi</span>
+              <p id="previewOutScope">Chưa xác định.</p>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <span>Giả định / ràng buộc</span>
+            <p id="previewRisks">Chưa ghi nhận.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="workspaceToast" role="status" aria-live="polite"></div>
+    <script src="./workspace.js?v=uc1-ba-aligned-v4"></script>
+  </body>
+</html>

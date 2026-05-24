@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-05 Phân Tích Quy Trình Và Bối Cảnh Nghiệp Vụ | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc5-analysis-v2" />
+  </head>
+  <body class="analysis-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-05</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc5-shell">
+      <section class="uc5-hero">
+        <div>
+          <p class="eyebrow">UC-BA-05 · Phân tích quy trình và bối cảnh nghiệp vụ</p>
+          <h1>Bản Đồ Phân Tích Nghiệp Vụ</h1>
+          <p>
+            BA biến thông tin thô từ UC4 thành bản đồ hiểu nghiệp vụ: current state,
+            future direction, bước quy trình, actor, input/output, pain point, rule,
+            exception, gap, risk và insight sẵn sàng chuyển sang yêu cầu.
+          </p>
+        </div>
+        <aside class="uc5-hero-status" aria-label="Tổng quan bản đồ phân tích">
+          <span>Bản đồ đang mở</span>
+          <strong id="activeMapName">Chưa chọn</strong>
+          <small id="activeMapMeta">Tạo mới hoặc chọn một bản đồ bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc5-layout">
+        <aside class="uc5-list-panel" aria-label="Danh sách bản đồ phân tích">
+          <div class="uc5-panel-head">
+            <div>
+              <p class="eyebrow">Analysis Map</p>
+              <h2>Bản đồ phân tích</h2>
+            </div>
+            <button class="mini-action" id="newMap" type="button">Tạo mới</button>
+          </div>
+          <div class="uc5-record-list" id="mapList"></div>
+        </aside>
+
+        <form class="uc5-form" id="analysisForm">
+          <div class="uc5-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Không gian phân tích</p>
+              <h2>Mô hình hóa nghiệp vụ</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="mapId" name="mapId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Nguồn phân tích và bối cảnh</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Tên bản đồ phân tích *</span>
+            <input id="mapName" name="mapName" type="text" required placeholder="Ví dụ: Phân tích quy trình duyệt khoản vay" />
+          </label>
+
+          <label class="ba-field">
+            <span>Bản ghi khai thác từ UC4 *</span>
+            <select id="elicitationRecord" name="elicitationRecord" required></select>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Current state</span>
+            <textarea id="currentState" name="currentState" rows="4" placeholder="Quy trình hiện tại đang vận hành như thế nào?"></textarea>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Future-state direction</span>
+            <textarea id="futureState" name="futureState" rows="4" placeholder="Quy trình mong muốn, hướng thay đổi hoặc nguyên tắc thiết kế tương lai."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Phạm vi phân tích</span>
+            <input id="analysisScope" name="analysisScope" type="text" placeholder="Ví dụ: luồng duyệt hồ sơ vay cá nhân" />
+          </label>
+
+          <label class="ba-field">
+            <span>Trạng thái</span>
+            <select id="analysisStatus" name="analysisStatus">
+              <option>Đang phân tích</option>
+              <option>Cần làm rõ</option>
+              <option>Sẵn sàng chuyển UC6</option>
+              <option>Tạm dừng</option>
+            </select>
+          </label>
+
+          <div class="uc5-source-panel span-2" aria-label="Nguồn từ UC4">
+            <div>
+              <span>Nguồn từ UC4</span>
+              <strong id="sourceRecordName">Chưa chọn bản ghi</strong>
+              <p id="sourceRecordMeta">Khi chọn bản ghi khai thác, BA có thể tạo nháp insight từ dữ liệu đã ghi nhận.</p>
+            </div>
+            <button class="secondary-action" id="draftFromRecord" type="button">Tạo nháp từ UC4</button>
+          </div>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Process map</strong>
+          </div>
+
+          <section class="uc5-process-board span-2" aria-label="Các bước quy trình">
+            <div class="uc5-process-toolbar">
+              <span id="stepCount">0 bước quy trình</span>
+              <button class="secondary-action" id="addProcessStep" type="button">Thêm bước</button>
+            </div>
+            <div class="uc5-process-list" id="processStepList"></div>
+          </section>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Gap, risk, conflict và insight chuyển UC6</strong>
+          </div>
+
+          <section class="uc5-analysis-grid span-2">
+            <article class="uc5-analysis-card">
+              <div class="uc5-capture-head">
+                <span>Gap</span>
+                <button class="mini-action" id="addGap" type="button">Thêm</button>
+              </div>
+              <div class="uc5-mini-list" id="gapList"></div>
+            </article>
+
+            <article class="uc5-analysis-card">
+              <div class="uc5-capture-head">
+                <span>Risk / constraint</span>
+                <button class="mini-action" id="addRisk" type="button">Thêm</button>
+              </div>
+              <div class="uc5-mini-list" id="riskList"></div>
+            </article>
+
+            <article class="uc5-analysis-card">
+              <div class="uc5-capture-head">
+                <span>Conflict</span>
+                <button class="mini-action" id="addConflict" type="button">Thêm</button>
+              </div>
+              <div class="uc5-mini-list" id="conflictList"></div>
+            </article>
+
+            <article class="uc5-analysis-card">
+              <div class="uc5-capture-head">
+                <span>Insight chuyển UC6</span>
+                <button class="mini-action" id="addInsight" type="button">Thêm</button>
+              </div>
+              <div class="uc5-mini-list" id="insightReadyList"></div>
+            </article>
+          </section>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardMapChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu bản đồ phân tích</button>
+          </div>
+        </form>
+
+        <aside class="uc5-summary-panel" aria-label="Tổng hợp chất lượng phân tích">
+          <div class="preview-card hero-preview">
+            <span>Analysis Map</span>
+            <strong id="previewMapName">Chưa đặt tên</strong>
+            <small id="previewMapMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc5-readiness">
+            <div>
+              <span>Sẵn sàng</span>
+              <strong id="analysisReadinessScore">0%</strong>
+            </div>
+            <p id="analysisReadinessText">Chưa đủ nền tảng để chuyển sang UC6.</p>
+          </div>
+
+          <div class="uc5-checklist">
+            <span class="mini-label">Điều kiện phân tích</span>
+            <p id="checkRecord">Đã chọn bản ghi UC4</p>
+            <p id="checkState">Có current state và future direction</p>
+            <p id="checkSteps">Có ít nhất 3 bước quy trình</p>
+            <p id="checkStepDetail">Bước có actor, input, output</p>
+            <p id="checkGapRisk">Có gap/risk/conflict được ghi nhận</p>
+            <p id="checkReadyInsight">Có insight sẵn sàng chuyển UC6</p>
+          </div>
+
+          <div class="uc5-lens-card">
+            <span class="mini-label">Process Lens</span>
+            <div id="processLens"></div>
+          </div>
+
+          <div class="preview-card">
+            <span>Cảnh báo BA</span>
+            <p id="analysisRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="analysisToast" role="status" aria-live="polite"></div>
+    <script src="./analysis.js?v=uc5-analysis-v2"></script>
+  </body>
+</html>

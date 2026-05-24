@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-07 Kiểm Tra Và Ưu Tiên Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc7-quality-v1" />
+  </head>
+  <body class="quality-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-07</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc7-shell">
+      <section class="uc7-hero">
+        <div>
+          <p class="eyebrow">UC-BA-07 · Kiểm tra và ưu tiên yêu cầu</p>
+          <h1>Bàn Kiểm Định Yêu Cầu</h1>
+          <p>
+            BA rà chất lượng requirement từ UC6: source trace, clarity, completeness,
+            testability, ambiguity, owner, acceptance criteria, sau đó chấm value/risk/effort
+            và quyết định yêu cầu nào sẵn sàng review.
+          </p>
+        </div>
+        <aside class="uc7-hero-status" aria-label="Tổng quan quality review">
+          <span>Requirement đang review</span>
+          <strong id="activeRequirementName">Chưa chọn</strong>
+          <small id="activeRequirementMeta">Chọn requirement để kiểm tra chất lượng.</small>
+        </aside>
+      </section>
+
+      <section class="uc7-layout">
+        <aside class="uc7-list-panel" aria-label="Danh sách requirement set">
+          <div class="uc7-panel-head">
+            <div>
+              <p class="eyebrow">Requirement Set</p>
+              <h2>Bộ yêu cầu</h2>
+            </div>
+          </div>
+          <div class="uc7-set-list" id="qualitySetList"></div>
+        </aside>
+
+        <form class="uc7-form" id="qualityForm">
+          <div class="uc7-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Quality Review</p>
+              <h2>Kiểm tra requirement</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="reviewId" name="reviewId" type="hidden" />
+          <input id="requirementId" name="requirementId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Requirement từ UC6</strong>
+          </div>
+
+          <label class="ba-field span-2">
+            <span>Requirement Set *</span>
+            <select id="requirementSet" name="requirementSet" required></select>
+          </label>
+
+          <section class="uc7-requirement-board span-2" aria-label="Danh sách requirement">
+            <div class="uc7-board-toolbar">
+              <span id="reviewRequirementCount">0 requirement</span>
+            </div>
+            <div class="uc7-requirement-list" id="qualityRequirementList"></div>
+          </section>
+
+          <div class="uc7-source-card span-2" aria-label="Requirement đang kiểm tra">
+            <span>Requirement đang kiểm tra</span>
+            <strong id="selectedRequirementTitle">Chưa chọn requirement</strong>
+            <p id="selectedRequirementDetail">Chọn requirement để xem cảnh báo chất lượng và điểm ưu tiên.</p>
+          </div>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Chấm điểm ưu tiên</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Value score *</span>
+            <input id="valueScore" name="valueScore" type="number" min="1" max="10" required />
+          </label>
+
+          <label class="ba-field">
+            <span>Risk score *</span>
+            <input id="riskScore" name="riskScore" type="number" min="1" max="10" required />
+          </label>
+
+          <label class="ba-field">
+            <span>Effort / complexity *</span>
+            <input id="effortScore" name="effortScore" type="number" min="1" max="10" required />
+          </label>
+
+          <label class="ba-field">
+            <span>MoSCoW</span>
+            <select id="moscow" name="moscow">
+              <option>Must</option>
+              <option>Should</option>
+              <option>Could</option>
+              <option>Won't now</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Review decision</span>
+            <select id="reviewDecision" name="reviewDecision">
+              <option>Need Clarification</option>
+              <option>Ready Review</option>
+              <option>Approved Candidate</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Reviewer</span>
+            <input id="reviewer" name="reviewer" type="text" placeholder="Ví dụ: BA Linh / PO / QA" />
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Review note</span>
+            <textarea id="reviewNote" name="reviewNote" rows="4" placeholder="Ghi chú về điểm cần làm rõ, lý do ưu tiên hoặc quyết định review."></textarea>
+          </label>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Cảnh báo chất lượng</strong>
+          </div>
+
+          <section class="uc7-warning-board span-2" aria-label="Cảnh báo chất lượng">
+            <div class="uc7-warning-list" id="qualityWarningList"></div>
+          </section>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="resetReview">Hoàn tác review</button>
+            <button class="primary-action" type="submit">Lưu quality review</button>
+          </div>
+        </form>
+
+        <aside class="uc7-summary-panel" aria-label="Tổng hợp quality review">
+          <div class="preview-card hero-preview">
+            <span>Quality score</span>
+            <strong id="qualityScore">0%</strong>
+            <small id="qualityScoreText">Chưa có requirement để kiểm tra.</small>
+          </div>
+
+          <div class="uc7-priority-card">
+            <div>
+              <span>Priority score</span>
+              <strong id="priorityScore">0</strong>
+            </div>
+            <p id="priorityText">Chưa có điểm ưu tiên.</p>
+          </div>
+
+          <div class="uc7-checklist">
+            <span class="mini-label">Checklist chất lượng</span>
+            <p id="checkTrace">Có source trace</p>
+            <p id="checkDescription">Có mô tả rõ</p>
+            <p id="checkACQuality">Có AC đủ kiểm thử</p>
+            <p id="checkOwnerQuality">Có owner / reviewer</p>
+            <p id="checkAmbiguity">Không có từ mơ hồ nghiêm trọng</p>
+            <p id="checkDecision">Decision phù hợp chất lượng</p>
+          </div>
+
+          <div class="uc7-lens-card">
+            <span class="mini-label">Review Lens</span>
+            <div id="qualityLens"></div>
+          </div>
+
+          <div class="preview-card">
+            <span>Cảnh báo BA</span>
+            <p id="qualityRisk">Chưa có cảnh báo.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="qualityToast" role="status" aria-live="polite"></div>
+    <script src="./quality.js?v=uc7-quality-v1"></script>
+  </body>
+</html>

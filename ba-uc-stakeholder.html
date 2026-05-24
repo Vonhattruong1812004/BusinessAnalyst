@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC-BA-02 Quản Lý Stakeholder Và Nguồn Thông Tin | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css?v=uc2-visual-v3" />
+  </head>
+  <body class="stakeholder-page">
+    <header class="actor-topbar">
+      <a class="brand" href="./dashboard.html" aria-label="Quay về trang chủ Business Analyst">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-BA-02</small>
+        </span>
+      </a>
+      <a class="back-link" href="./dashboard.html">← Trang chủ BA</a>
+    </header>
+
+    <main class="uc2-shell">
+      <section class="uc2-hero">
+        <div>
+          <p class="eyebrow">UC-BA-02 · Quản lý stakeholder và nguồn thông tin</p>
+          <h1>Bản Đồ Stakeholder</h1>
+          <p>
+            BA xác định ai liên quan, ai ra quyết định, ai cung cấp tri thức nghiệp vụ,
+            nguồn thông tin nào cần khai thác và cách cộng tác với từng nhóm trong quá trình phân tích.
+          </p>
+        </div>
+        <aside class="uc2-hero-status" aria-label="Tổng quan stakeholder">
+          <span>Stakeholder đang chọn</span>
+          <strong id="activeStakeholderName">Chưa chọn</strong>
+          <small id="activeStakeholderMeta">Tạo mới hoặc chọn một stakeholder bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="uc2-layout">
+        <aside class="uc2-list-panel" aria-label="Danh sách stakeholder">
+          <div class="uc2-panel-head">
+            <div>
+              <p class="eyebrow">Nguồn thông tin</p>
+              <h2>Stakeholder</h2>
+            </div>
+            <button class="mini-action" id="newStakeholder" type="button">Thêm mới</button>
+          </div>
+
+          <div class="uc2-stats" aria-label="Thống kê stakeholder">
+            <span><strong id="totalStakeholders">0</strong> tổng</span>
+            <span><strong id="decisionMakers">0</strong> quyết định</span>
+            <span><strong id="pendingAnswers">0</strong> cần hỏi</span>
+          </div>
+
+          <div class="uc2-record-list" id="stakeholderList"></div>
+        </aside>
+
+        <form class="uc2-form" id="stakeholderForm">
+          <div class="uc2-panel-head form-title-row">
+            <div>
+              <p class="eyebrow">Hồ sơ stakeholder</p>
+              <h2>Thông tin cộng tác</h2>
+            </div>
+            <span class="required-note">* Bắt buộc</span>
+          </div>
+
+          <input id="stakeholderId" name="stakeholderId" type="hidden" />
+
+          <div class="form-section-title">
+            <span>1</span>
+            <strong>Nhận diện stakeholder / nguồn thông tin</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Tên stakeholder / nguồn *</span>
+            <input id="name" name="name" type="text" required placeholder="Ví dụ: Chị An - SME Rủi ro" />
+          </label>
+
+          <label class="ba-field">
+            <span>Loại nguồn *</span>
+            <select id="sourceType" name="sourceType" required>
+              <option>Con người</option>
+              <option>Tài liệu</option>
+              <option>Hệ thống hiện có</option>
+              <option>Quy trình quan sát</option>
+              <option>Dữ liệu / báo cáo</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Vai trò</span>
+            <select id="role" name="role">
+              <option>Sponsor</option>
+              <option>Business Owner</option>
+              <option>SME</option>
+              <option>End User</option>
+              <option>Product Owner</option>
+              <option>Project Manager</option>
+              <option>Developer / Architect</option>
+              <option>QA / Tester</option>
+              <option>Compliance / Legal</option>
+              <option>Nguồn tài liệu</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Phòng ban / nhóm</span>
+            <input id="department" name="department" type="text" placeholder="Ví dụ: Khối rủi ro, Vận hành, Pháp chế" />
+          </label>
+
+          <div class="form-section-title">
+            <span>2</span>
+            <strong>Ảnh hưởng, quyền quyết định và mức quan tâm</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Mức ảnh hưởng</span>
+            <select id="influence" name="influence">
+              <option>Cao</option>
+              <option>Trung bình</option>
+              <option>Thấp</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Mức quan tâm</span>
+            <select id="interest" name="interest">
+              <option>Cao</option>
+              <option>Trung bình</option>
+              <option>Thấp</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Quyền quyết định</span>
+            <select id="decisionPower" name="decisionPower">
+              <option>Người phê duyệt</option>
+              <option>Người tư vấn</option>
+              <option>Người cung cấp thông tin</option>
+              <option>Người bị ảnh hưởng</option>
+              <option>Không áp dụng</option>
+            </select>
+          </label>
+
+          <label class="ba-field">
+            <span>Chiến lược cộng tác</span>
+            <select id="engagementStrategy" name="engagementStrategy">
+              <option>Quản lý sát</option>
+              <option>Duy trì hài lòng</option>
+              <option>Cập nhật thường xuyên</option>
+              <option>Theo dõi định kỳ</option>
+            </select>
+          </label>
+
+          <div class="form-section-title">
+            <span>3</span>
+            <strong>Nhu cầu, thông tin cần khai thác và giao tiếp</strong>
+          </div>
+
+          <label class="ba-field">
+            <span>Nhu cầu / mong đợi của stakeholder</span>
+            <textarea id="needs" name="needs" rows="4" placeholder="Stakeholder mong muốn điều gì? Họ đang đau ở đâu?"></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Thông tin có thể cung cấp</span>
+            <textarea id="informationProvided" name="informationProvided" rows="4" placeholder="Quy tắc nghiệp vụ, quy trình, dữ liệu, báo cáo, ngoại lệ, quyết định..."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Câu hỏi cần làm rõ</span>
+            <textarea id="openQuestions" name="openQuestions" rows="4" placeholder="Các câu hỏi BA cần hỏi stakeholder này."></textarea>
+          </label>
+
+          <label class="ba-field">
+            <span>Kênh và nhịp giao tiếp</span>
+            <textarea id="communicationPlan" name="communicationPlan" rows="4" placeholder="Ví dụ: workshop hàng tuần, phỏng vấn 1-1, email xác nhận decision."></textarea>
+          </label>
+
+          <label class="ba-field span-2">
+            <span>Rủi ro / lưu ý cộng tác</span>
+            <textarea id="risks" name="risks" rows="4" placeholder="Ví dụ: khó sắp lịch, quan điểm xung đột, dữ liệu chưa đáng tin cậy, quyền quyết định chưa rõ."></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="secondary-action" type="button" id="discardStakeholderChanges">Hủy thay đổi</button>
+            <button class="primary-action" type="submit">Lưu stakeholder</button>
+          </div>
+        </form>
+
+        <aside class="uc2-summary-panel" aria-label="Tổng quan stakeholder">
+          <div class="preview-card hero-preview">
+            <span>Stakeholder / nguồn</span>
+            <strong id="previewStakeholderName">Chưa đặt tên</strong>
+            <small id="previewStakeholderMeta">Chưa có dữ liệu.</small>
+          </div>
+
+          <div class="uc2-position-card">
+            <span class="mini-label">Vị trí trên ma trận</span>
+            <strong id="matrixPosition">Chưa xác định</strong>
+            <p id="matrixAdvice">Chưa đủ dữ liệu để đề xuất cách cộng tác.</p>
+          </div>
+
+          <div class="uc2-raci-card">
+            <span class="mini-label">Gợi ý RACI</span>
+            <div class="raci-mini">
+              <span>R</span><strong id="raciR">-</strong>
+              <span>A</span><strong id="raciA">-</strong>
+              <span>C</span><strong id="raciC">-</strong>
+              <span>I</span><strong id="raciI">-</strong>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <span>Nhu cầu / mong đợi</span>
+            <p id="previewNeeds">Chưa ghi nhận.</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Thông tin có thể cung cấp</span>
+            <p id="previewInformation">Chưa ghi nhận.</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Câu hỏi cần làm rõ</span>
+            <p id="previewQuestions">Chưa ghi nhận.</p>
+          </div>
+
+          <div class="preview-card">
+            <span>Kế hoạch giao tiếp</span>
+            <p id="previewCommunication">Chưa ghi nhận.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="./stakeholder.js?v=uc2-stakeholder-v1"></script>
+  </body>
+</html>

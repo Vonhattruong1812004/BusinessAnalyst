@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="La Ban BA - nen tang phan tich nghiep vu, quan ly yeu cau va hoc BA."
+    />
+    <title>La Bàn BA | BA Compass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="signalCanvas" aria-hidden="true"></canvas>
+
+    <div class="page-shell">
+      <header class="site-header" aria-label="Thanh điều hướng chính">
+        <a class="brand" href="#top" aria-label="La Bàn BA">
+          <span class="brand-mark">LB</span>
+          <span>
+            <strong>La Bàn BA</strong>
+            <small>BA Compass</small>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Điều hướng">
+          <a href="#platform">Nền tảng</a>
+          <a href="#academy">Học BA</a>
+          <a href="#ai">AI</a>
+        </nav>
+
+        <button class="header-action" type="button" data-scroll-auth>
+          <span>Vào hệ thống</span>
+        </button>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Business Analysis Operating Platform</p>
+            <h1 id="hero-title">La Bàn BA</h1>
+            <p class="hero-lede">
+              Nền tảng phân tích nghiệp vụ, quản lý yêu cầu, học BA và cộng tác
+              cùng AI dành cho Business Analyst hiện đại.
+            </p>
+
+            <div class="hero-actions" aria-label="Hành động nhanh">
+              <button class="primary-cta" type="button" data-scroll-auth>
+                Bắt đầu
+                <span aria-hidden="true">→</span>
+              </button>
+              <a class="secondary-cta" href="#platform">Khám phá</a>
+            </div>
+
+            <div class="signal-strip" aria-label="Chỉ số nền tảng">
+              <div>
+                <strong>360°</strong>
+                <span>traceability</span>
+              </div>
+              <div>
+                <strong>AI</strong>
+                <span>copilot</span>
+              </div>
+              <div>
+                <strong>6</strong>
+                <span>cấp độ BA</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="auth-panel" id="auth-panel" aria-label="Đăng nhập và đăng ký">
+            <div class="panel-topline">
+              <span class="live-dot" aria-hidden="true"></span>
+              <span id="aiPhrase">Sẵn sàng phân tích yêu cầu</span>
+            </div>
+
+            <div class="auth-tabs" role="tablist" aria-label="Chọn biểu mẫu">
+              <button
+                class="auth-tab is-active"
+                id="login-tab"
+                type="button"
+                role="tab"
+                aria-controls="login-form"
+                aria-selected="true"
+                data-auth-tab="login"
+              >
+                Đăng nhập
+              </button>
+              <button
+                class="auth-tab"
+                id="register-tab"
+                type="button"
+                role="tab"
+                aria-controls="register-form"
+                aria-selected="false"
+                data-auth-tab="register"
+              >
+                Đăng ký
+              </button>
+            </div>
+
+            <form class="auth-form is-active" id="login-form" role="tabpanel" aria-labelledby="login-tab">
+              <div class="actor-choice" aria-label="Chọn vai trò đăng nhập">
+                <label>
+                  <input type="radio" name="actor" value="ba" checked />
+                  <span>
+                    <strong>Business Analyst</strong>
+                    <small>Vào workspace BA</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="actor" value="stakeholder" />
+                  <span>
+                    <strong>Stakeholder</strong>
+                    <small>Vào phản hồi nghiệp vụ</small>
+                  </span>
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" placeholder="ba@company.com" autocomplete="email" required />
+              </label>
+
+              <div class="field password-field">
+                <label for="login-password">Mật khẩu</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  name="password"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                  required
+                />
+                <button class="ghost-icon" type="button" data-toggle-password aria-label="Hiện mật khẩu">
+                  ◐
+                </button>
+              </div>
+
+              <div class="form-row">
+                <label class="check-field">
+                  <input type="checkbox" checked />
+                  <span>Ghi nhớ</span>
+                </label>
+                <a href="#auth-panel">Quên mật khẩu?</a>
+              </div>
+
+              <button class="submit-btn" type="submit">Đăng nhập</button>
+            </form>
+
+            <form class="auth-form" id="register-form" role="tabpanel" aria-labelledby="register-tab" hidden>
+              <div class="actor-choice" aria-label="Chọn vai trò đăng ký">
+                <label>
+                  <input type="radio" name="actor" value="ba" checked />
+                  <span>
+                    <strong>Business Analyst</strong>
+                    <small>Tạo workspace BA</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="actor" value="stakeholder" />
+                  <span>
+                    <strong>Stakeholder</strong>
+                    <small>Tạo kênh phản hồi</small>
+                  </span>
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Họ tên</span>
+                <input type="text" name="name" placeholder="Nguyễn An" autocomplete="name" required />
+              </label>
+
+              <label class="field">
+                <span>Email công việc</span>
+                <input type="email" name="email" placeholder="an@company.com" autocomplete="email" required />
+              </label>
+
+              <div class="field password-field">
+                <label for="register-password">Mật khẩu</label>
+                <input
+                  id="register-password"
+                  type="password"
+                  name="password"
+                  placeholder="Tối thiểu 8 ký tự"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                />
+                <button class="ghost-icon" type="button" data-toggle-password aria-label="Hiện mật khẩu">
+                  ◐
+                </button>
+              </div>
+
+              <label class="check-field policy-line">
+                <input type="checkbox" required />
+                <span>Tôi đồng ý với điều khoản sử dụng nền tảng.</span>
+              </label>
+
+              <button class="submit-btn" type="submit">Tạo tài khoản</button>
+            </form>
+
+            <div class="auth-divider"><span>Hoặc tiếp tục với</span></div>
+
+            <div class="social-grid" aria-label="Đăng nhập nhanh">
+              <button type="button">Google</button>
+              <button type="button">Microsoft</button>
+            </div>
+
+            <a class="dashboard-link" href="./dashboard.html">
+              Mở Trang Chủ BA
+            </a>
+
+            <a class="dashboard-link secondary-dashboard-link" href="./stakeholder-dashboard.html">
+              Mở Trang Chủ Stakeholder
+            </a>
+          </aside>
+        </section>
+
+        <section class="feature-band" id="platform" aria-label="Các lớp nền tảng">
+          <article class="feature-tile">
+            <span class="tile-code">01</span>
+            <h2>BA Workbench</h2>
+            <p>Không gian phân tích, stakeholder, yêu cầu, quy trình, phê duyệt, baseline và thay đổi.</p>
+          </article>
+          <article class="feature-tile" id="academy">
+            <span class="tile-code">02</span>
+            <h2>BA Academy</h2>
+            <p>Lộ trình học theo cấp độ, quiz, case study, mô phỏng phỏng vấn và trò chơi BA.</p>
+          </article>
+          <article class="feature-tile" id="ai">
+            <span class="tile-code">03</span>
+            <h2>AI Copilot</h2>
+            <p>Tóm tắt, phát hiện mơ hồ, gợi ý câu hỏi, user story, acceptance criteria và truy vết.</p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js?v=actor-login-routing-v1"></script>
+  </body>
+</html>
