@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-STK-01 cho Stakeholder trả lời câu hỏi khai thác do Business Analyst gửi."
+    />
+    <title>UC-STK-01 Trả Lời Câu Hỏi Khai Thác | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=stk-uc1-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/stakeholder-uc.css?v=stk-uc1-answer-v1" />
+  </head>
+  <body class="stakeholder-uc-page">
+    <canvas id="stakeholderUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar stakeholder-uc-topbar">
+      <a class="brand" href="../actors/stakeholder.html" aria-label="Quay về trang chủ Stakeholder">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-STK-01</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/stakeholder.html">← Trang chủ Stakeholder</a>
+    </header>
+
+    <main class="stakeholder-uc-shell" aria-labelledby="page-title">
+      <section class="stakeholder-uc-hero">
+        <div>
+          <p class="eyebrow">UC-STK-01 · Trả lời câu hỏi khai thác</p>
+          <h1 id="page-title">Phòng Phản Hồi Câu Hỏi</h1>
+          <p>
+            Stakeholder tiếp nhận bộ câu hỏi do BA chuẩn bị, trả lời theo từng nhóm nghiệp vụ,
+            đánh dấu điểm chưa rõ và gửi phản hồi để BA tiếp tục phân tích yêu cầu.
+          </p>
+        </div>
+
+        <aside class="stakeholder-uc-status" aria-label="Tình trạng phản hồi">
+          <span>Bộ câu hỏi đang chọn</span>
+          <strong id="activePackTitle">Chưa chọn</strong>
+          <small id="activePackMeta">Chọn một bộ câu hỏi để bắt đầu phản hồi.</small>
+        </aside>
+      </section>
+
+      <section class="stakeholder-uc-layout">
+        <aside class="stakeholder-question-inbox" aria-label="Bộ câu hỏi chờ phản hồi">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Hộp câu hỏi</p>
+              <h2>Việc BA cần phản hồi</h2>
+            </div>
+            <span id="inboxCount">0 bộ</span>
+          </div>
+
+          <div class="stakeholder-pack-list" id="packList"></div>
+        </aside>
+
+        <form class="stakeholder-answer-workbench" id="answerForm">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Không gian trả lời</p>
+              <h2 id="formPackName">Chưa chọn bộ câu hỏi</h2>
+            </div>
+            <span class="response-state" id="responseState">Chờ phản hồi</span>
+          </div>
+
+          <div class="answer-context-grid" aria-label="Ngữ cảnh câu hỏi">
+            <article>
+              <span>Không gian</span>
+              <strong id="workspaceName">-</strong>
+            </article>
+            <article>
+              <span>Mục tiêu hỏi</span>
+              <strong id="objectiveName">-</strong>
+            </article>
+            <article>
+              <span>Người phụ trách</span>
+              <strong>BA Linh</strong>
+            </article>
+          </div>
+
+          <label class="stakeholder-field">
+            <span>Ghi chú chung cho BA</span>
+            <textarea
+              id="generalNote"
+              rows="3"
+              placeholder="Ví dụ: Tôi trả lời theo góc nhìn vận hành chi nhánh, phần rủi ro cần SME xác nhận thêm."
+            ></textarea>
+          </label>
+
+          <section class="answer-question-area" aria-label="Danh sách câu hỏi cần trả lời">
+            <div class="answer-toolbar">
+              <strong id="questionCount">0 câu hỏi</strong>
+              <span id="answerProgress">0% hoàn tất</span>
+            </div>
+            <div class="answer-question-list" id="questionList"></div>
+          </section>
+
+          <label class="stakeholder-field">
+            <span>Tài liệu / ví dụ đính kèm</span>
+            <input id="attachmentInput" type="text" placeholder="Nhập tên tài liệu, link hoặc ví dụ: Quy trình phê duyệt v2.pdf" />
+          </label>
+
+          <div class="stakeholder-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>
+              AI chỉ gợi ý cách diễn đạt rõ hơn. Stakeholder là người xác nhận nội dung cuối cùng
+              trước khi gửi cho BA.
+            </p>
+          </div>
+
+          <div class="stakeholder-form-actions">
+            <button class="secondary-action" id="saveDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="polishAnswers" type="button">Gợi ý diễn đạt</button>
+            <button class="primary-action" type="submit">Gửi phản hồi cho BA</button>
+          </div>
+        </form>
+
+        <aside class="stakeholder-response-panel" aria-label="Tóm tắt chất lượng phản hồi">
+          <div class="response-score-card">
+            <span>Độ hoàn tất</span>
+            <strong id="completionScore">0%</strong>
+            <small id="completionText">Chưa có câu trả lời nào.</small>
+          </div>
+
+          <div class="response-checklist">
+            <p id="checkAnswered">Có câu trả lời nghiệp vụ</p>
+            <p id="checkClarify">Đánh dấu câu chưa rõ nếu cần</p>
+            <p id="checkScope">Nêu rõ câu ngoài phạm vi</p>
+            <p id="checkEvidence">Có ghi chú hoặc tài liệu minh chứng</p>
+          </div>
+
+          <div class="response-timeline">
+            <span>Luồng xử lý</span>
+            <ol>
+              <li>BA gửi bộ câu hỏi</li>
+              <li>Stakeholder trả lời</li>
+              <li>BA phân tích nhu cầu</li>
+              <li>BA chuyển hóa thành yêu cầu</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/stakeholder-use-cases/answer-questions.js?v=stk-uc1-answer-v1"></script>
+  </body>
+</html>
