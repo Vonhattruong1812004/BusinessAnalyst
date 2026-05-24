@@ -387,7 +387,7 @@ h1 {
 
 .actor-choice {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
   gap: 10px;
 }
 
@@ -608,6 +608,17 @@ h1 {
 .secondary-dashboard-link:hover {
   border-color: rgba(255, 200, 87, 0.42);
   background: rgba(255, 200, 87, 0.12);
+}
+
+.product-owner-dashboard-link {
+  border-color: rgba(100, 232, 255, 0.22);
+  background: rgba(100, 232, 255, 0.08);
+  color: #64e8ff;
+}
+
+.product-owner-dashboard-link:hover {
+  border-color: rgba(100, 232, 255, 0.46);
+  background: rgba(100, 232, 255, 0.13);
 }
 
 .feature-band {

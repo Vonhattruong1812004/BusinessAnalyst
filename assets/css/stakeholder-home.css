@@ -448,7 +448,7 @@
 
 .stakeholder-home-page .ba-flow-step strong {
   align-self: center;
-  color: #ffd4e3;
+  color: #ff4f9a;
   font-size: clamp(1rem, 1.28vw, 1.22rem);
   line-height: 1.18;
   text-align: left;
@@ -471,7 +471,7 @@
 .stakeholder-home-page a.ba-flow-step:visited strong,
 .stakeholder-home-page a.ba-flow-step:hover strong,
 .stakeholder-home-page a.ba-flow-step:focus-visible strong {
-  color: #ffe6f0;
+  color: #ff2f88;
 }
 
 .stakeholder-home-page a.ba-flow-step:hover,

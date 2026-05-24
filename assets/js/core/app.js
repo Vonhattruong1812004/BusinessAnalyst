@@ -15,6 +15,10 @@ const ACTOR_DASHBOARDS = {
   stakeholder: {
     label: "Stakeholder",
     url: "./pages/actors/stakeholder.html"
+  },
+  po: {
+    label: "Product Owner",
+    url: "./pages/actors/product-owner.html"
   }
 };
 
