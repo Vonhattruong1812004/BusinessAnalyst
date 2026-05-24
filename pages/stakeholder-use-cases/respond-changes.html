@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-STK-05 cho Stakeholder phản hồi change request và tác động thay đổi yêu cầu."
+    />
+    <title>UC-STK-05 Phản Hồi Thay Đổi Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=stk-uc5-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/stakeholder-uc.css?v=stk-uc5-change-v1" />
+  </head>
+  <body class="stakeholder-uc-page stakeholder-change-page">
+    <canvas id="stakeholderUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar stakeholder-uc-topbar">
+      <a class="brand" href="../actors/stakeholder.html" aria-label="Quay về trang chủ Stakeholder">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-STK-05</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/stakeholder.html">← Trang chủ Stakeholder</a>
+    </header>
+
+    <main class="stakeholder-uc-shell" aria-labelledby="page-title">
+      <section class="stakeholder-uc-hero change-hero">
+        <div>
+          <p class="eyebrow">UC-STK-05 · Phản hồi thay đổi yêu cầu</p>
+          <h1 id="page-title">Trạm Phản Hồi Change Request</h1>
+          <p>
+            Stakeholder xem change request do BA gửi, đánh giá tác động nghiệp vụ,
+            nêu điều kiện chấp nhận hoặc lý do không đồng ý để BA hoàn thiện impact analysis.
+          </p>
+        </div>
+
+        <aside class="stakeholder-uc-status" aria-label="Tình trạng change request">
+          <span>Change request đang xem</span>
+          <strong id="activeChangeTitle">Chưa chọn</strong>
+          <small id="activeChangeMeta">Chọn một thay đổi để phản hồi.</small>
+        </aside>
+      </section>
+
+      <section class="stakeholder-uc-layout change-layout">
+        <aside class="stakeholder-question-inbox" aria-label="Danh sách change request">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Change request</p>
+              <h2>Chờ phản hồi nghiệp vụ</h2>
+            </div>
+            <span id="changeCount">0 CR</span>
+          </div>
+
+          <div class="stakeholder-pack-list" id="changeList"></div>
+        </aside>
+
+        <section class="stakeholder-answer-workbench change-workbench" aria-label="Chi tiết thay đổi yêu cầu">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Impact analysis sơ bộ</p>
+              <h2 id="changeTitle">Chưa chọn change request</h2>
+            </div>
+            <span class="response-state" id="changeStatus">Chờ phản hồi</span>
+          </div>
+
+          <div class="answer-context-grid" aria-label="Ngữ cảnh thay đổi">
+            <article>
+              <span>Mã CR</span>
+              <strong id="changeCode">-</strong>
+            </article>
+            <article>
+              <span>Nguồn thay đổi</span>
+              <strong id="changeSource">-</strong>
+            </article>
+            <article>
+              <span>Mức khẩn cấp</span>
+              <strong id="changeUrgency">-</strong>
+            </article>
+          </div>
+
+          <div class="change-detail-grid">
+            <article class="requirement-info-card span-2">
+              <span>Lý do thay đổi</span>
+              <p id="changeReason">-</p>
+            </article>
+            <article class="requirement-info-card">
+              <span>Phạm vi tác động</span>
+              <p id="impactScope">-</p>
+            </article>
+            <article class="requirement-info-card">
+              <span>Luồng phê duyệt</span>
+              <p id="approvalPath">-</p>
+            </article>
+            <article class="requirement-info-card span-2">
+              <span>Impact note của BA</span>
+              <p id="impactNote">-</p>
+            </article>
+          </div>
+
+          <section class="impact-review-area" aria-label="Requirement bị ảnh hưởng">
+            <div class="answer-toolbar">
+              <strong>Requirement / rule bị ảnh hưởng</strong>
+              <span id="impactCount">0 mục</span>
+            </div>
+            <div class="impact-chip-list" id="impactList"></div>
+          </section>
+        </section>
+
+        <form class="stakeholder-response-panel change-decision-panel" id="changeResponseForm">
+          <div class="response-score-card">
+            <span>Độ đủ phản hồi</span>
+            <strong id="changeResponseScore">0%</strong>
+            <small id="changeResponseText">Chưa có phản hồi nghiệp vụ.</small>
+          </div>
+
+          <label class="stakeholder-field">
+            <span>Phản hồi của Stakeholder</span>
+            <select id="changeDecision" name="changeDecision">
+              <option>Đồng ý với thay đổi</option>
+              <option>Đồng ý có điều kiện</option>
+              <option>Cần BA làm rõ</option>
+              <option>Không đồng ý</option>
+            </select>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Mức ảnh hưởng theo nghiệp vụ</span>
+            <select id="businessImpact" name="businessImpact">
+              <option>Cao</option>
+              <option>Trung bình</option>
+              <option>Thấp</option>
+            </select>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Nhận xét nghiệp vụ</span>
+            <textarea
+              id="businessComment"
+              name="businessComment"
+              rows="5"
+              placeholder="Nhận xét tác động đến vận hành, người dùng, rule, dữ liệu, báo cáo hoặc SLA."
+            ></textarea>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Điều kiện chấp nhận / lý do không đồng ý</span>
+            <textarea
+              id="conditionOrReason"
+              name="conditionOrReason"
+              rows="5"
+              placeholder="Bắt buộc khi đồng ý có điều kiện, cần làm rõ hoặc không đồng ý."
+            ></textarea>
+          </label>
+
+          <div class="response-checklist">
+            <p id="checkChangeDecision">Đã chọn phản hồi</p>
+            <p id="checkBusinessImpact">Đã đánh giá tác động</p>
+            <p id="checkBusinessComment">Có nhận xét nghiệp vụ</p>
+            <p id="checkCondition">Có điều kiện/lý do khi cần</p>
+          </div>
+
+          <div class="stakeholder-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>AI có thể gợi ý vùng tác động, nhưng Stakeholder vẫn là người xác nhận phản hồi cuối cùng.</p>
+          </div>
+
+          <div class="stakeholder-form-actions">
+            <button class="secondary-action" id="saveChangeDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="suggestChangeFeedback" type="button">Gợi ý phản hồi</button>
+            <button class="primary-action" type="submit">Gửi phản hồi cho BA</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/stakeholder-use-cases/respond-changes.js?v=stk-uc5-change-v1"></script>
+  </body>
+</html>
