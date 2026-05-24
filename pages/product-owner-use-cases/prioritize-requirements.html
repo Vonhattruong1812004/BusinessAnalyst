@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-PO-02 cho Product Owner ưu tiên yêu cầu theo value, risk, effort, urgency và MoSCoW."
+    />
+    <title>UC-PO-02 Ưu Tiên Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=po-uc2-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/product-owner-uc.css?v=po-uc2-priority-v1" />
+  </head>
+  <body class="product-owner-uc-page po-priority-page">
+    <canvas id="productOwnerUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar product-owner-uc-topbar">
+      <a class="brand" href="../actors/product-owner.html" aria-label="Quay về trang chủ Product Owner">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-PO-02</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/product-owner.html">← Trang chủ Product Owner</a>
+    </header>
+
+    <main class="product-owner-uc-shell" aria-labelledby="page-title">
+      <section class="product-owner-uc-hero po-priority-hero">
+        <div>
+          <p class="eyebrow">UC-PO-02 · Ưu tiên yêu cầu</p>
+          <h1 id="page-title">Bàn Ưu Tiên Backlog</h1>
+          <p>
+            Product Owner sắp xếp yêu cầu sau khi BA bàn giao và review: quyết định mức ưu tiên,
+            cân bằng giá trị sản phẩm, rủi ro, effort, độ khẩn cấp và phạm vi release.
+          </p>
+        </div>
+
+        <aside class="product-owner-uc-status priority-pulse" aria-label="Tình trạng ưu tiên yêu cầu">
+          <span>Backlog đang xử lý</span>
+          <strong id="activeSetTitle">Chưa chọn</strong>
+          <small id="priorityMeta">Chọn một bộ yêu cầu để bắt đầu ưu tiên.</small>
+        </aside>
+      </section>
+
+      <section class="priority-command-grid">
+        <aside class="po-package-inbox priority-set-panel" aria-label="Bộ yêu cầu có thể ưu tiên">
+          <div class="po-panel-head">
+            <div>
+              <p class="eyebrow">Nguồn từ BA</p>
+              <h2>Bộ yêu cầu</h2>
+            </div>
+            <span id="setCount">0 bộ</span>
+          </div>
+          <div class="po-package-list" id="setList"></div>
+        </aside>
+
+        <section class="priority-workbench" aria-label="Bảng chấm điểm ưu tiên yêu cầu">
+          <div class="po-panel-head">
+            <div>
+              <p class="eyebrow">Product decision</p>
+              <h2 id="setTitle">Chưa chọn bộ yêu cầu</h2>
+            </div>
+            <span class="po-state" id="priorityStatus">Đang ưu tiên</span>
+          </div>
+
+          <div class="priority-metrics" aria-label="Tổng quan điểm ưu tiên">
+            <article>
+              <span>Must have</span>
+              <strong id="mustCount">0</strong>
+              <small>Yêu cầu bắt buộc</small>
+            </article>
+            <article>
+              <span>Ready</span>
+              <strong id="readyCount">0</strong>
+              <small>Đủ điều kiện release</small>
+            </article>
+            <article>
+              <span>Cần BA</span>
+              <strong id="clarifyCount">0</strong>
+              <small>Cần làm rõ trước</small>
+            </article>
+          </div>
+
+          <div class="priority-toolbar">
+            <div>
+              <strong>Requirement backlog</strong>
+              <small id="sortHint">Sắp xếp theo điểm ưu tiên cao nhất.</small>
+            </div>
+            <button class="secondary-action compact-action" id="suggestPriority" type="button">Gợi ý ưu tiên</button>
+          </div>
+
+          <div class="priority-requirement-list" id="priorityRequirementList"></div>
+        </section>
+
+        <aside class="priority-release-panel" aria-label="Kết quả ưu tiên backlog">
+          <div class="po-score-card">
+            <span>Độ hoàn tất</span>
+            <strong id="priorityCompletion">0%</strong>
+            <small id="priorityCompletionText">Chưa có đủ quyết định ưu tiên.</small>
+          </div>
+
+          <div class="release-buckets">
+            <article>
+              <span>Release này</span>
+              <strong id="currentReleaseCount">0 yêu cầu</strong>
+            </article>
+            <article>
+              <span>Release sau</span>
+              <strong id="nextReleaseCount">0 yêu cầu</strong>
+            </article>
+            <article>
+              <span>Cần làm rõ</span>
+              <strong id="needsBaCount">0 yêu cầu</strong>
+            </article>
+          </div>
+
+          <label class="po-field">
+            <span>Ghi chú quyết định ưu tiên</span>
+            <textarea
+              id="priorityNote"
+              rows="6"
+              placeholder="Ghi rõ lý do ưu tiên: value, risk, effort, stakeholder, release goal hoặc dependency."
+            ></textarea>
+          </label>
+
+          <div class="po-checklist">
+            <p id="checkScored">Đã chấm điểm tất cả yêu cầu</p>
+            <p id="checkMoscow">Đã chọn MoSCoW</p>
+            <p id="checkBucket">Đã chọn release bucket</p>
+            <p id="checkPriorityNote">Có ghi chú khi còn item cần BA làm rõ</p>
+          </div>
+
+          <div class="po-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>AI chỉ gợi ý thứ tự dựa trên dữ liệu BA cung cấp. Product Owner vẫn quyết định ưu tiên cuối cùng.</p>
+          </div>
+
+          <div class="po-form-actions">
+            <button class="secondary-action" id="savePriorityDraft" type="button">Lưu nháp</button>
+            <button class="primary-action" id="confirmPriority" type="button">Xác nhận ưu tiên</button>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="poToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/product-owner-use-cases/prioritize-requirements.js?v=po-uc2-priority-v1"></script>
+  </body>
+</html>
