@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-STK-02 cho Stakeholder cung cấp nhu cầu nghiệp vụ cho Business Analyst."
+    />
+    <title>UC-STK-02 Cung Cấp Nhu Cầu Nghiệp Vụ | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=stk-uc2-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/stakeholder-uc.css?v=stk-uc2-need-v1" />
+  </head>
+  <body class="stakeholder-uc-page stakeholder-need-page">
+    <canvas id="stakeholderUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar stakeholder-uc-topbar">
+      <a class="brand" href="../actors/stakeholder.html" aria-label="Quay về trang chủ Stakeholder">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-STK-02</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/stakeholder.html">← Trang chủ Stakeholder</a>
+    </header>
+
+    <main class="stakeholder-uc-shell" aria-labelledby="page-title">
+      <section class="stakeholder-uc-hero need-hero">
+        <div>
+          <p class="eyebrow">UC-STK-02 · Cung cấp nhu cầu nghiệp vụ</p>
+          <h1 id="page-title">Trạm Gửi Nhu Cầu</h1>
+          <p>
+            Stakeholder mô tả nhu cầu, vấn đề, mong muốn, tác động và ví dụ thực tế để BA có
+            nguồn dữ liệu rõ ràng trước khi phân tích và chuyển hóa thành yêu cầu chính thức.
+          </p>
+        </div>
+
+        <aside class="stakeholder-uc-status" aria-label="Tình trạng nhu cầu">
+          <span>Nhu cầu đang soạn</span>
+          <strong id="activeNeedTitle">Chưa chọn</strong>
+          <small id="activeNeedMeta">Tạo mới hoặc chọn một nhu cầu bên trái.</small>
+        </aside>
+      </section>
+
+      <section class="stakeholder-uc-layout">
+        <aside class="stakeholder-question-inbox" aria-label="Danh sách nhu cầu đã cung cấp">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Nhu cầu</p>
+              <h2>Dữ liệu gửi BA</h2>
+            </div>
+            <button class="mini-action" id="newNeed" type="button">Tạo mới</button>
+          </div>
+
+          <div class="stakeholder-pack-list" id="needList"></div>
+        </aside>
+
+        <form class="stakeholder-answer-workbench need-workbench" id="needForm">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Thông tin nghiệp vụ</p>
+              <h2 id="formNeedName">Nhu cầu mới</h2>
+            </div>
+            <span class="response-state" id="needStatus">Đang soạn</span>
+          </div>
+
+          <input id="needId" name="needId" type="hidden" />
+
+          <div class="answer-context-grid" aria-label="Ngữ cảnh cung cấp nhu cầu">
+            <article>
+              <span>Không gian</span>
+              <strong>Cho vay số</strong>
+            </article>
+            <article>
+              <span>Vai trò</span>
+              <strong>Cung cấp nghiệp vụ</strong>
+            </article>
+            <article>
+              <span>Người xử lý</span>
+              <strong>Business Analyst</strong>
+            </article>
+          </div>
+
+          <div class="need-form-grid">
+            <label class="stakeholder-field">
+              <span>Tên nhu cầu *</span>
+              <input id="needName" name="needName" type="text" required placeholder="Ví dụ: Cảnh báo hồ sơ thiếu chứng từ" />
+            </label>
+
+            <label class="stakeholder-field">
+              <span>Nhóm nhu cầu</span>
+              <select id="needCategory" name="needCategory">
+                <option>Quy trình</option>
+                <option>Dữ liệu</option>
+                <option>Báo cáo</option>
+                <option>Phê duyệt</option>
+                <option>Trải nghiệm người dùng</option>
+                <option>Tuân thủ</option>
+                <option>Vận hành</option>
+              </select>
+            </label>
+
+            <label class="stakeholder-field span-2">
+              <span>Bối cảnh / vấn đề hiện tại *</span>
+              <textarea id="currentProblem" name="currentProblem" rows="4" required placeholder="Mô tả tình huống thực tế, ai bị ảnh hưởng, điều gì đang gây chậm, sai, thiếu hoặc khó kiểm soát."></textarea>
+            </label>
+
+            <label class="stakeholder-field span-2">
+              <span>Mong muốn / kết quả kỳ vọng *</span>
+              <textarea id="expectedOutcome" name="expectedOutcome" rows="4" required placeholder="Mô tả điều Stakeholder mong hệ thống/quy trình hỗ trợ sau khi cải tiến."></textarea>
+            </label>
+
+            <label class="stakeholder-field">
+              <span>Lý do quan trọng</span>
+              <textarea id="businessReason" name="businessReason" rows="4" placeholder="Vì sao nhu cầu này đáng để BA phân tích? Tác động đến doanh thu, rủi ro, vận hành, trải nghiệm hoặc tuân thủ?"></textarea>
+            </label>
+
+            <label class="stakeholder-field">
+              <span>Ví dụ thực tế</span>
+              <textarea id="realExample" name="realExample" rows="4" placeholder="Ví dụ: hồ sơ A bị trả lại 3 lần vì thiếu chứng từ thu nhập nhưng nhân viên không biết thiếu gì."></textarea>
+            </label>
+
+            <label class="stakeholder-field">
+              <span>Mức độ ảnh hưởng</span>
+              <select id="impactLevel" name="impactLevel">
+                <option>Cao</option>
+                <option>Trung bình</option>
+                <option>Thấp</option>
+              </select>
+            </label>
+
+            <label class="stakeholder-field">
+              <span>Độ khẩn cấp</span>
+              <select id="urgencyLevel" name="urgencyLevel">
+                <option>Cần trong tháng này</option>
+                <option>Cần trong quý này</option>
+                <option>Có thể xử lý sau</option>
+              </select>
+            </label>
+
+            <label class="stakeholder-field span-2">
+              <span>Tài liệu / link / minh chứng</span>
+              <input id="evidence" name="evidence" type="text" placeholder="Ví dụ: file quy trình, ảnh màn hình, link báo cáo, mã hồ sơ mẫu" />
+            </label>
+          </div>
+
+          <div class="stakeholder-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>
+              AI có thể sắp xếp ý thô thành mô tả rõ hơn theo cấu trúc: vấn đề, tác động,
+              mong muốn, ví dụ. BA vẫn là người phân tích và quyết định chuyển thành yêu cầu.
+            </p>
+          </div>
+
+          <div class="stakeholder-form-actions">
+            <button class="secondary-action" id="saveNeedDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="structureNeed" type="button">Gợi ý cấu trúc</button>
+            <button class="primary-action" type="submit">Gửi nhu cầu cho BA</button>
+          </div>
+        </form>
+
+        <aside class="stakeholder-response-panel" aria-label="Tóm tắt chất lượng nhu cầu">
+          <div class="response-score-card">
+            <span>Độ rõ nhu cầu</span>
+            <strong id="needScore">0%</strong>
+            <small id="needScoreText">Chưa đủ dữ liệu để gửi BA.</small>
+          </div>
+
+          <div class="response-checklist">
+            <p id="checkNeedName">Có tên nhu cầu</p>
+            <p id="checkProblem">Có bối cảnh hoặc vấn đề</p>
+            <p id="checkOutcome">Có kết quả kỳ vọng</p>
+            <p id="checkImpact">Có tác động hoặc độ khẩn cấp</p>
+            <p id="checkEvidence">Có ví dụ hoặc minh chứng</p>
+          </div>
+
+          <div class="response-timeline">
+            <span>Luồng xử lý</span>
+            <ol>
+              <li>Stakeholder gửi nhu cầu</li>
+              <li>BA xem xét và làm rõ</li>
+              <li>BA phân tích bối cảnh</li>
+              <li>BA chuyển hóa thành yêu cầu nếu hợp lệ</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/stakeholder-use-cases/provide-needs.js?v=stk-uc2-need-v1"></script>
+  </body>
+</html>

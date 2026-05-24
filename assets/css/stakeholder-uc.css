@@ -254,6 +254,7 @@
 
 .stakeholder-field textarea,
 .stakeholder-field input,
+.stakeholder-field select,
 .answer-card textarea,
 .answer-card select {
   width: 100%;
@@ -267,10 +268,36 @@
 
 .stakeholder-field textarea:focus,
 .stakeholder-field input:focus,
+.stakeholder-field select:focus,
 .answer-card textarea:focus,
 .answer-card select:focus {
   border-color: rgba(143, 183, 255, 0.68);
   box-shadow: 0 0 0 4px rgba(143, 183, 255, 0.12);
+}
+
+.stakeholder-need-page {
+  background:
+    radial-gradient(circle at 15% 8%, rgba(255, 143, 183, 0.2), transparent 30%),
+    radial-gradient(circle at 88% 14%, rgba(143, 183, 255, 0.18), transparent 28%),
+    linear-gradient(115deg, #0a0813 0%, #19102a 48%, #241622 100%);
+}
+
+.need-hero > div::after {
+  background: radial-gradient(circle, rgba(143, 183, 255, 0.28), transparent 62%);
+}
+
+.need-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.need-form-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+.need-workbench .stakeholder-field {
+  margin-bottom: 0;
 }
 
 .answer-toolbar {
