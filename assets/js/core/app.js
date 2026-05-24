@@ -10,11 +10,11 @@ const aiPhrase = document.querySelector("#aiPhrase");
 const ACTOR_DASHBOARDS = {
   ba: {
     label: "Business Analyst",
-    url: "./dashboard.html"
+    url: "./pages/actors/business-analyst.html"
   },
   stakeholder: {
     label: "Stakeholder",
-    url: "./stakeholder-dashboard.html"
+    url: "./pages/actors/stakeholder.html"
   }
 };
 
