@@ -300,6 +300,63 @@
   margin-bottom: 0;
 }
 
+.stakeholder-confirm-page {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(143, 183, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 84% 16%, rgba(255, 214, 126, 0.15), transparent 28%),
+    linear-gradient(115deg, #070b16 0%, #121d2c 48%, #211624 100%);
+}
+
+.confirm-hero > div::after {
+  background: radial-gradient(circle, rgba(255, 214, 126, 0.26), transparent 62%);
+}
+
+.confirm-layout {
+  grid-template-columns: minmax(260px, 0.72fr) minmax(560px, 1.52fr) minmax(290px, 0.76fr);
+}
+
+.record-section-list {
+  display: grid;
+  gap: 16px;
+}
+
+.record-section-card {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 22px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(143, 183, 255, 0.12), rgba(255, 214, 126, 0.06)),
+    rgba(10, 12, 24, 0.66);
+}
+
+.record-section-card p {
+  margin: 0 0 16px;
+  color: rgba(255, 248, 255, 0.86);
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.record-section-card label {
+  display: grid;
+  gap: 8px;
+}
+
+.record-section-card select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: #fff;
+  background: rgba(6, 5, 16, 0.64);
+  outline: none;
+}
+
+.confirm-decision-panel {
+  position: sticky;
+  top: 20px;
+}
+
 .answer-toolbar {
   display: flex;
   align-items: center;

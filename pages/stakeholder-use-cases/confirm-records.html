@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-STK-03 cho Stakeholder xác nhận thông tin BA đã ghi nhận."
+    />
+    <title>UC-STK-03 Xác Nhận Thông Tin Ghi Nhận | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=stk-uc3-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/stakeholder-uc.css?v=stk-uc3-confirm-v1" />
+  </head>
+  <body class="stakeholder-uc-page stakeholder-confirm-page">
+    <canvas id="stakeholderUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar stakeholder-uc-topbar">
+      <a class="brand" href="../actors/stakeholder.html" aria-label="Quay về trang chủ Stakeholder">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-STK-03</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/stakeholder.html">← Trang chủ Stakeholder</a>
+    </header>
+
+    <main class="stakeholder-uc-shell" aria-labelledby="page-title">
+      <section class="stakeholder-uc-hero confirm-hero">
+        <div>
+          <p class="eyebrow">UC-STK-03 · Xác nhận thông tin ghi nhận</p>
+          <h1 id="page-title">Trạm Kiểm Chứng Nghiệp Vụ</h1>
+          <p>
+            Stakeholder rà soát thông tin BA đã tổng hợp sau khai thác, xác nhận phần đúng,
+            yêu cầu chỉnh sửa phần sai và bổ sung dữ liệu còn thiếu trước khi BA chuẩn hóa yêu cầu.
+          </p>
+        </div>
+
+        <aside class="stakeholder-uc-status" aria-label="Tình trạng xác nhận">
+          <span>Bản ghi đang xem</span>
+          <strong id="activeRecordTitle">Chưa chọn</strong>
+          <small id="activeRecordMeta">Chọn một bản ghi để xác nhận thông tin.</small>
+        </aside>
+      </section>
+
+      <section class="stakeholder-uc-layout confirm-layout">
+        <aside class="stakeholder-question-inbox" aria-label="Danh sách bản ghi chờ xác nhận">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Bản ghi BA</p>
+              <h2>Chờ xác nhận</h2>
+            </div>
+            <span id="recordCount">0 bản</span>
+          </div>
+
+          <div class="stakeholder-pack-list" id="recordList"></div>
+        </aside>
+
+        <section class="stakeholder-answer-workbench confirm-workbench" aria-label="Nội dung BA đã ghi nhận">
+          <div class="stakeholder-panel-head">
+            <div>
+              <p class="eyebrow">Nội dung ghi nhận</p>
+              <h2 id="recordTitle">Chưa chọn bản ghi</h2>
+            </div>
+            <span class="response-state" id="recordStatus">Chờ xác nhận</span>
+          </div>
+
+          <div class="answer-context-grid" aria-label="Ngữ cảnh bản ghi">
+            <article>
+              <span>Không gian</span>
+              <strong id="workspaceName">-</strong>
+            </article>
+            <article>
+              <span>Chủ đề</span>
+              <strong id="recordTopic">-</strong>
+            </article>
+            <article>
+              <span>Người ghi nhận</span>
+              <strong>BA Linh</strong>
+            </article>
+          </div>
+
+          <div class="record-section-list" id="recordSectionList"></div>
+        </section>
+
+        <form class="stakeholder-response-panel confirm-decision-panel" id="confirmForm">
+          <div class="response-score-card">
+            <span>Quyết định xác nhận</span>
+            <strong id="confirmScore">0%</strong>
+            <small id="confirmScoreText">Chưa có đánh giá nào.</small>
+          </div>
+
+          <label class="stakeholder-field">
+            <span>Hành động của Stakeholder</span>
+            <select id="decision" name="decision">
+              <option>Đã xác nhận</option>
+              <option>Cần BA chỉnh sửa</option>
+              <option>Cần bổ sung thông tin</option>
+              <option>Chưa chắc chắn</option>
+            </select>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Phản hồi cho BA</span>
+            <textarea
+              id="feedback"
+              name="feedback"
+              rows="6"
+              placeholder="Ghi rõ phần nào đúng, phần nào cần chỉnh, thông tin bổ sung hoặc người cần xác minh thêm."
+            ></textarea>
+          </label>
+
+          <label class="stakeholder-field">
+            <span>Minh chứng / nguồn xác minh</span>
+            <input id="evidence" name="evidence" type="text" placeholder="Ví dụ: biên bản workshop, quy trình vận hành, SME cần hỏi thêm" />
+          </label>
+
+          <div class="response-checklist">
+            <p id="checkDecision">Đã chọn quyết định</p>
+            <p id="checkSections">Đã đánh giá từng nhóm thông tin</p>
+            <p id="checkFeedback">Có phản hồi hoặc minh chứng</p>
+            <p id="checkReady">Sẵn sàng gửi BA</p>
+          </div>
+
+          <div class="stakeholder-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>AI có thể gợi ý điểm chưa rõ, nhưng không được tự xác nhận thay Stakeholder.</p>
+          </div>
+
+          <div class="stakeholder-form-actions">
+            <button class="secondary-action" id="saveConfirmDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="suggestFeedback" type="button">Gợi ý phản hồi</button>
+            <button class="primary-action" type="submit">Gửi xác nhận cho BA</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="toast" id="stakeholderToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/stakeholder-use-cases/confirm-records.js?v=stk-uc3-confirm-v1"></script>
+  </body>
+</html>
