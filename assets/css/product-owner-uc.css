@@ -1,0 +1,450 @@
+.product-owner-uc-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #effbff;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(47, 125, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 86% 12%, rgba(100, 232, 255, 0.16), transparent 28%),
+    linear-gradient(115deg, #050916 0%, #08172e 48%, #08243a 100%);
+}
+
+#productOwnerUcCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+.product-owner-uc-page::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 12% 28%, rgba(100, 232, 255, 0.14), transparent 26%),
+    radial-gradient(circle at 72% 44%, rgba(47, 125, 255, 0.18), transparent 30%),
+    repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.026) 0 1px, transparent 1px 18px);
+}
+
+.product-owner-uc-topbar .brand-mark {
+  border-color: rgba(100, 232, 255, 0.5);
+  color: #bff3ff;
+  background: rgba(100, 232, 255, 0.1);
+}
+
+.product-owner-uc-shell {
+  width: min(1720px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 34px 0 60px;
+}
+
+.product-owner-uc-hero {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(280px, 420px);
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+
+.product-owner-uc-hero > div,
+.product-owner-uc-status,
+.po-package-inbox,
+.po-review-workbench,
+.po-decision-panel {
+  border: 1px solid rgba(239, 251, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(239, 251, 255, 0.1), rgba(239, 251, 255, 0.034)),
+    rgba(7, 19, 38, 0.78);
+  box-shadow:
+    0 26px 90px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(22px) saturate(1.2);
+}
+
+.product-owner-uc-hero > div {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 56px);
+}
+
+.product-owner-uc-hero > div::after {
+  position: absolute;
+  right: -120px;
+  bottom: -150px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  content: "";
+  background: radial-gradient(circle, rgba(100, 232, 255, 0.25), transparent 62%);
+}
+
+.product-owner-uc-hero h1 {
+  max-width: 920px;
+  margin: 10px 0 16px;
+  font-size: clamp(3rem, 6vw, 6.8rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.product-owner-uc-hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  color: rgba(239, 251, 255, 0.76);
+  font-size: clamp(1rem, 1.35vw, 1.28rem);
+  line-height: 1.7;
+}
+
+.product-owner-uc-status {
+  display: grid;
+  align-content: center;
+  min-height: 260px;
+  border-radius: 28px;
+  padding: 32px;
+}
+
+.product-owner-uc-status span,
+.po-panel-head span,
+.po-score-card span,
+.po-field span,
+.po-info-card span,
+.po-ai-note span,
+.po-requirement-card label span {
+  color: rgba(239, 251, 255, 0.62);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.product-owner-uc-status strong {
+  display: block;
+  margin: 16px 0 12px;
+  color: #fff;
+  font-size: clamp(1.7rem, 2.8vw, 3.1rem);
+  line-height: 1.04;
+}
+
+.product-owner-uc-status small {
+  color: rgba(239, 251, 255, 0.7);
+  font-weight: 700;
+}
+
+.product-owner-uc-layout {
+  display: grid;
+  grid-template-columns: minmax(270px, 0.76fr) minmax(580px, 1.5fr) minmax(300px, 0.76fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.po-package-inbox,
+.po-review-workbench,
+.po-decision-panel {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.po-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.po-panel-head h2 {
+  margin: 4px 0 0;
+  color: #fff;
+  font-size: clamp(1.25rem, 1.8vw, 2rem);
+}
+
+.po-state,
+#packageCount {
+  flex: 0 0 auto;
+  border: 1px solid rgba(100, 232, 255, 0.28);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #bff3ff !important;
+  background: rgba(100, 232, 255, 0.1);
+}
+
+.po-package-list,
+.po-requirement-list,
+.po-checklist {
+  display: grid;
+  gap: 14px;
+}
+
+.po-package-card {
+  width: 100%;
+  min-height: 128px;
+  cursor: pointer;
+  text-align: left;
+  border: 1px solid rgba(239, 251, 255, 0.12);
+  border-radius: 20px;
+  padding: 18px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(100, 232, 255, 0.14), rgba(47, 125, 255, 0.1)),
+    rgba(5, 15, 34, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.po-package-card:hover,
+.po-package-card.is-active {
+  border-color: rgba(100, 232, 255, 0.62);
+  box-shadow:
+    0 18px 52px rgba(47, 125, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.po-package-card span,
+.po-package-card small {
+  display: block;
+  color: rgba(239, 251, 255, 0.68);
+  font-weight: 800;
+}
+
+.po-package-card strong {
+  display: block;
+  margin: 10px 0;
+  color: #fff;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.po-context-grid,
+.po-package-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.po-package-summary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.po-package-summary .span-2 {
+  grid-column: 1 / -1;
+}
+
+.po-context-grid article,
+.po-info-card,
+.po-score-card,
+.po-checklist,
+.po-ai-note,
+.po-requirement-card {
+  border: 1px solid rgba(239, 251, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(4, 12, 28, 0.54);
+  padding: 16px;
+}
+
+.po-context-grid span {
+  display: block;
+  color: rgba(239, 251, 255, 0.62);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.po-context-grid strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.po-info-card p {
+  margin: 10px 0 0;
+  color: rgba(239, 251, 255, 0.8);
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.po-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  color: rgba(239, 251, 255, 0.72);
+}
+
+.po-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.po-card-head > span {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: 900;
+  background: linear-gradient(135deg, #64e8ff, #2f7dff);
+  box-shadow: 0 16px 34px rgba(47, 125, 255, 0.24);
+}
+
+.po-card-head strong {
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.po-card-head small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(239, 251, 255, 0.62);
+  font-weight: 800;
+}
+
+.po-requirement-card p {
+  margin: 0 0 14px;
+  color: rgba(239, 251, 255, 0.84);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.po-ac-list {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.po-ac-list small {
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: rgba(239, 251, 255, 0.72);
+  background: rgba(100, 232, 255, 0.07);
+  font-weight: 800;
+}
+
+.po-requirement-card label,
+.po-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.po-field {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.po-field textarea,
+.po-field select,
+.po-requirement-card textarea,
+.po-requirement-card select {
+  width: 100%;
+  border: 1px solid rgba(239, 251, 255, 0.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: #fff;
+  background: rgba(3, 9, 22, 0.66);
+  outline: none;
+}
+
+.po-field textarea:focus,
+.po-field select:focus,
+.po-requirement-card textarea:focus,
+.po-requirement-card select:focus {
+  border-color: rgba(100, 232, 255, 0.68);
+  box-shadow: 0 0 0 4px rgba(100, 232, 255, 0.12);
+}
+
+.po-score-card strong {
+  display: block;
+  margin: 10px 0 4px;
+  color: #fff;
+  font-size: 3rem;
+}
+
+.po-score-card small,
+.po-ai-note p {
+  color: rgba(239, 251, 255, 0.68);
+  font-weight: 800;
+}
+
+.po-checklist {
+  margin: 16px 0;
+}
+
+.po-checklist p {
+  margin: 0;
+  border-radius: 14px;
+  padding: 12px 14px 12px 38px;
+  color: rgba(239, 251, 255, 0.64);
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+}
+
+.po-checklist p::before {
+  position: absolute;
+  left: 14px;
+  content: "•";
+  color: #64e8ff;
+}
+
+.po-checklist p.is-done {
+  color: #fff;
+  background: rgba(100, 232, 255, 0.12);
+}
+
+.po-checklist p.is-done::before {
+  content: "✓";
+}
+
+.po-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.po-form-actions .primary-action,
+.po-form-actions .secondary-action {
+  min-height: 52px;
+  border-radius: 16px;
+  padding-inline: 20px;
+}
+
+.product-owner-uc-page .toast {
+  background: rgba(7, 19, 38, 0.95);
+  border-color: rgba(100, 232, 255, 0.34);
+}
+
+@media (max-width: 1180px) {
+  .product-owner-uc-layout,
+  .product-owner-uc-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .po-context-grid,
+  .po-package-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .product-owner-uc-shell {
+    width: min(100% - 28px, 1720px);
+  }
+
+  .product-owner-uc-hero h1 {
+    font-size: clamp(2.5rem, 15vw, 4.6rem);
+  }
+}

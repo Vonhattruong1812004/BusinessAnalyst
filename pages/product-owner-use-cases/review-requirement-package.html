@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="UC-PO-01 cho Product Owner rà soát gói yêu cầu do Business Analyst bàn giao."
+    />
+    <title>UC-PO-01 Rà Soát Gói Yêu Cầu | La Bàn BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css?v=po-uc1-base-v1" />
+    <link rel="stylesheet" href="../../assets/css/product-owner-uc.css?v=po-uc1-review-pack-v1" />
+  </head>
+  <body class="product-owner-uc-page">
+    <canvas id="productOwnerUcCanvas" aria-hidden="true"></canvas>
+
+    <header class="actor-topbar product-owner-uc-topbar">
+      <a class="brand" href="../actors/product-owner.html" aria-label="Quay về trang chủ Product Owner">
+        <span class="brand-mark">LB</span>
+        <span>
+          <strong>La Bàn BA</strong>
+          <small>UC-PO-01</small>
+        </span>
+      </a>
+      <a class="back-link" href="../actors/product-owner.html">← Trang chủ Product Owner</a>
+    </header>
+
+    <main class="product-owner-uc-shell" aria-labelledby="page-title">
+      <section class="product-owner-uc-hero">
+        <div>
+          <p class="eyebrow">UC-PO-01 · Rà soát gói yêu cầu</p>
+          <h1 id="page-title">Phòng Review Gói Yêu Cầu</h1>
+          <p>
+            Product Owner kiểm tra gói yêu cầu BA bàn giao theo góc nhìn sản phẩm:
+            giá trị kinh doanh, phạm vi, độ sẵn sàng backlog, acceptance criteria và rủi ro release.
+          </p>
+        </div>
+
+        <aside class="product-owner-uc-status" aria-label="Tình trạng review gói yêu cầu">
+          <span>Gói đang rà soát</span>
+          <strong id="activePackageTitle">Chưa chọn</strong>
+          <small id="activePackageMeta">Chọn một gói yêu cầu để bắt đầu review.</small>
+        </aside>
+      </section>
+
+      <section class="product-owner-uc-layout">
+        <aside class="po-package-inbox" aria-label="Danh sách gói yêu cầu chờ PO rà soát">
+          <div class="po-panel-head">
+            <div>
+              <p class="eyebrow">Gói yêu cầu</p>
+              <h2>Chờ Product Owner</h2>
+            </div>
+            <span id="packageCount">0 gói</span>
+          </div>
+
+          <div class="po-package-list" id="packageList"></div>
+        </aside>
+
+        <section class="po-review-workbench" aria-label="Chi tiết gói yêu cầu">
+          <div class="po-panel-head">
+            <div>
+              <p class="eyebrow">Nội dung BA bàn giao</p>
+              <h2 id="packageTitle">Chưa chọn gói yêu cầu</h2>
+            </div>
+            <span class="po-state" id="packageStatus">Chờ PO rà soát</span>
+          </div>
+
+          <div class="po-context-grid" aria-label="Tổng quan gói yêu cầu">
+            <article>
+              <span>Release</span>
+              <strong id="releaseName">-</strong>
+            </article>
+            <article>
+              <span>Loại gói</span>
+              <strong id="packageType">-</strong>
+            </article>
+            <article>
+              <span>Số yêu cầu</span>
+              <strong id="requirementTotal">0</strong>
+            </article>
+          </div>
+
+          <div class="po-package-summary">
+            <article class="po-info-card span-2">
+              <span>Phạm vi bao gồm</span>
+              <p id="includedScope">-</p>
+            </article>
+            <article class="po-info-card span-2">
+              <span>Phạm vi loại trừ / open issue</span>
+              <p id="excludedScope">-</p>
+            </article>
+          </div>
+
+          <section class="po-requirement-area" aria-label="Danh sách requirement trong gói">
+            <div class="po-toolbar">
+              <strong>Requirement cần PO đánh giá</strong>
+              <span id="requirementProgress">0% đã đánh giá</span>
+            </div>
+            <div class="po-requirement-list" id="requirementList"></div>
+          </section>
+        </section>
+
+        <form class="po-decision-panel" id="packageReviewForm">
+          <div class="po-score-card">
+            <span>Độ sẵn sàng</span>
+            <strong id="reviewScore">0%</strong>
+            <small id="reviewScoreText">Chưa có đánh giá review.</small>
+          </div>
+
+          <label class="po-field">
+            <span>Kết quả rà soát</span>
+            <select id="reviewDecision" name="reviewDecision">
+              <option>Sẵn sàng ưu tiên</option>
+              <option>Cần BA làm rõ</option>
+              <option>Cần chỉnh sửa phạm vi</option>
+              <option>Tạm hoãn</option>
+              <option>Từ chối</option>
+            </select>
+          </label>
+
+          <label class="po-field">
+            <span>Giá trị sản phẩm</span>
+            <select id="productValue" name="productValue">
+              <option>Cao</option>
+              <option>Trung bình</option>
+              <option>Thấp</option>
+            </select>
+          </label>
+
+          <label class="po-field">
+            <span>Phản hồi cho BA</span>
+            <textarea
+              id="reviewNote"
+              name="reviewNote"
+              rows="6"
+              placeholder="Ghi rõ điểm cần BA làm rõ, chỉnh scope, tách nhỏ requirement hoặc lý do PO chưa chấp nhận."
+            ></textarea>
+          </label>
+
+          <label class="po-field">
+            <span>Rủi ro / phụ thuộc cần lưu ý</span>
+            <textarea
+              id="riskNote"
+              name="riskNote"
+              rows="4"
+              placeholder="Ví dụ: phụ thuộc SME, scope release, pháp lý, dữ liệu, team kỹ thuật hoặc UAT."
+            ></textarea>
+          </label>
+
+          <div class="po-checklist">
+            <p id="checkDecision">Đã chọn kết quả review</p>
+            <p id="checkValue">Đã đánh giá giá trị sản phẩm</p>
+            <p id="checkRequirements">Đã đánh giá từng requirement</p>
+            <p id="checkNote">Có ghi chú khi chưa sẵn sàng</p>
+          </div>
+
+          <div class="po-ai-note">
+            <span>AI hỗ trợ</span>
+            <p>AI có thể gợi ý điểm thiếu trong gói yêu cầu. Product Owner vẫn là người quyết định trạng thái review cuối cùng.</p>
+          </div>
+
+          <div class="po-form-actions">
+            <button class="secondary-action" id="saveReviewDraft" type="button">Lưu nháp</button>
+            <button class="secondary-action" id="suggestReview" type="button">Gợi ý phản hồi</button>
+            <button class="primary-action" type="submit">Gửi review cho BA</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="toast" id="poToast" role="status" aria-live="polite"></div>
+    <script src="../../assets/js/product-owner-use-cases/review-requirement-package.js?v=po-uc1-review-pack-v1"></script>
+  </body>
+</html>
